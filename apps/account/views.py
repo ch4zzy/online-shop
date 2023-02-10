@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 # Local
 from .forms import LoginForm, UserRegistration
-
+from .models import Profile
 # Create your views here.
 
 
@@ -43,6 +43,7 @@ def register(request):
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
+            Profile.objects.create(user=new_user)
             new_user.save()
             return render(
                 request,

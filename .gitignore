@@ -7,6 +7,8 @@
 local.py
 *.db
 staticfiles
+media/
+img/
 
 # Celery
 celerybeat*

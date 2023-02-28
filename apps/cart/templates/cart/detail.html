@@ -31,7 +31,7 @@
                         <td>
                             <form action="{% url "cart:cart_add" product.id %}" method="post">
                                 {{ item.update_quantity_form.quantity }}
-                                {{ item.update_quantity_form.override }}
+                                {{ item.update_quantity_form.update }}
                                 <input type="submit" value="Update">
                                 {% csrf_token %}
                             </form>

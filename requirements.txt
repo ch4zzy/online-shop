@@ -6,3 +6,4 @@ Pillow==9.4.0
 social-auth-app-django==2.1.0
 celery==4.4.2
 flower==0.9.3
+braintree==3.45.0

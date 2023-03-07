@@ -24,6 +24,7 @@ urlpatterns = [
     path('orders/', include('apps.orders.urls', namespace='order_create')),
     path('cart/', include('apps.cart.urls', namespace='cart')),
     path('account/', include('apps.account.urls')),
+    path('payment/', include('apps.payment.urls', namespace='payment')),
     path('', include('apps.shop.urls', namespace='shop')),
     path('social-auth/', include('social_django.urls', namespace='social')),
 ]

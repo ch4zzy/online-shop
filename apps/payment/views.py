@@ -11,7 +11,8 @@ def payment_process(request):
     order = get_object_or_404(Order, id=order_id)
 
     if request.method == 'POST':
-        nonce = braintree.Transaction.sale({
+        nonce = request.POST.get('payment_method_nonce', None)
+        result = braintree.Transaction.sale({
             'amount': '{:.2f}'.format(order.get_total_cost()),
             'payment_method_nonce': nonce,
             'options': {

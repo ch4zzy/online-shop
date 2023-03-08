@@ -31,3 +31,4 @@ venv/
 *.ntvs*
 *.njsproj
 *.sln
+.vscode

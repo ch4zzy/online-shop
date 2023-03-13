@@ -68,7 +68,7 @@
         </tbody>
     </table>
     <p>Apply a coupon</p>
-    <form action="{% url 'coupons:appls' %}" method="post">
+    <form action="{% url 'coupons:apply' %}" method="post">
         {{ coupon_apply_form }}
         <input type="submit" value="Apply">
         {% csrf_token %}

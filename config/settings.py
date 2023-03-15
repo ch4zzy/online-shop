@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # Social auth
     'social_django',
+    'crispy_forms',
 
     # Local
     'apps.account',
@@ -208,3 +209,9 @@ EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 # SMRP end
+
+
+# crispy
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# crispy end 

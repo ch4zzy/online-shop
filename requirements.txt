@@ -9,3 +9,5 @@ flower==0.9.3
 braintree==3.45.0
 WeasyPrint==0.42.3
 django-crispy-forms==1.8.0
+psycopg2-binary==2.9.5
+python-jose>=3.0.0

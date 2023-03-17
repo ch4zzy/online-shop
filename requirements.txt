@@ -11,3 +11,4 @@ WeasyPrint==0.42.3
 django-crispy-forms==1.8.0
 psycopg2-binary==2.9.5
 python-jose>=3.0.0
+gunicorn==19.9.0

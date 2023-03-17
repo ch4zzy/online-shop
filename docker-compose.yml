@@ -7,7 +7,7 @@ services:
       - 5672:5672
   web:
     build: .
-    command: python /code/manage.py runserver 0.0.0.0:8000
+    command: gunicorn config.wsgi -b 0.0.0.0:8000
     volumes:
       - .:/code
     ports:

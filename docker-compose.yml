@@ -6,10 +6,11 @@ services:
     ports:
       - 5672:5672
   web:
-    build: .
-    command: gunicorn config.wsgi -b 0.0.0.0:8000
     volumes:
       - .:/code
+      - static:/static
+    build: 
+      context: .
     ports:
       - 8000:8000
     depends_on:
@@ -20,6 +21,14 @@ services:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - web
   celery:
     restart: always
     build: . 
@@ -28,9 +37,9 @@ services:
       - .:/code
     container_name: celery
     depends_on:
-      - db
       - rabbitmq
       - web
 
 volumes:
   postgres_data:
+  static:

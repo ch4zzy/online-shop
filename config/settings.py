@@ -27,7 +27,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
 
-ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['test-marketplace.com','marketplace', 'localhost', '127.0.0.1']
 
 
 # Application definition

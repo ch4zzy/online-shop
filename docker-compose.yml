@@ -31,6 +31,5 @@ services:
       - db
       - rabbitmq
       - web
-
 volumes:
   postgres_data:

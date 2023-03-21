@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Social auth
     'social_django',
     'crispy_forms',
+    'rest_framework',
 
     # Local
     'apps.account',
@@ -219,3 +220,14 @@ EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # crispy end 
+
+
+# rest config
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+# rest config end
+

@@ -28,6 +28,7 @@ urlpatterns = [
     path('coupons/', include('apps.coupons.urls', namespace='coupons')),
     path('', include('apps.shop.urls', namespace='shop')),
     path('social-auth/', include('social_django.urls', namespace='social')),
+    path('api/', include('apps.shop.api.urls', namespace='api')),
 ]
 
 

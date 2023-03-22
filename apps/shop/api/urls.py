@@ -9,5 +9,8 @@ app_name = 'shop'
 urlpatterns = [
     path('category/', views.CategoryListView.as_view(), name='category_list'),
     path('category/', views.CategoryDetailView.as_view(), name='category_detail'),
+    path('category/create/', views.CategoryCreateView.as_view(), name='category_create'),
+    path('product/', views.ProductListView.as_view(), name='product_list'),
+    path('product/', views.ProductDetailView.as_view(), name='product_detail'),
 ]
 

@@ -31,7 +31,7 @@ class CategoryCreateView(APIView):
     def post(self, request):
         new_cat = Category.objects.create(
             name = request.data['name'],
-            slug = request.data[slugify('name')],
+            slug = request.data[slugify('name')].lower(),
         )
         return Response({'category': model_to_dict(new_cat)})
 

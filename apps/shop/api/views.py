@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.utils.text import slugify
@@ -34,4 +34,12 @@ class CategoryCreateView(APIView):
             slug = request.data[slugify('name')].lower(),
         )
         return Response({'category': model_to_dict(new_cat)})
+    
+
+class CategoryDeleteView(APIView):
+    def post(self, request):
+        del_cat = Category.objects.filter(
+            id = request.data['id'],
+        )
+        return Response(del_cat.delete())
 

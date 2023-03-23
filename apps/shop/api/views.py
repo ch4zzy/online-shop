@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.forms import model_to_dict
 # Local
 from ..models import Category, Product, Comment
-from .serializers import CategorySerializer, ProductSerializer
+from .serializers import CategorySerializer, ProductSerializer, CategorySerializer2
 
 class CategoryListView(generics.ListAPIView):
     queryset = Category.objects.all()
@@ -26,7 +26,21 @@ class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+class CategoryAPIView(APIView):
+    def get(self, request):
+        cat = Category.objects.all()
+        return Response({'category': CategorySerializer2(cat, many=True).data})
+    
+    def post(self, request):
+        serializer = CategorySerializer2(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'category': serializer.data})
 
+
+
+
+'''
 class CategoryCreateView(APIView):
     def post(self, request):
         new_cat = Category.objects.create(
@@ -42,4 +56,4 @@ class CategoryDeleteView(APIView):
             id = request.data['id'],
         )
         return Response(del_cat.delete())
-
+'''

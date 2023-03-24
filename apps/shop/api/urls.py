@@ -9,6 +9,10 @@ app_name = 'shop'
 urlpatterns = [
     path('category/', views.CategoryAPIView.as_view()),
     path('category/<int:pk>/', views.CategoryAPIView.as_view()),
+
+    path('product/', views.ProductAPIView.as_view()),
+    path('product/<int:pk>', views.ProductAPIView.as_view()),
+
     
     #path('category/', views.CategoryListView.as_view(), name='category_list'),
     #path('category/', views.CategoryDetailView.as_view(), name='category_detail'),

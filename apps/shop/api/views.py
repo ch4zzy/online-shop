@@ -29,31 +29,36 @@ class ProductDetailView(generics.RetrieveAPIView):
 class CategoryAPIView(APIView):
     def get(self, request):
         cat = Category.objects.all()
-        return Response({'category': CategorySerializer2(cat, many=True).data})
+        return Response({'category': CategorySerializer2(cat, many=True).data,})
     
     def post(self, request):
         serializer = CategorySerializer2(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({'category': serializer.data})
-
-
-
-
-'''
-class CategoryCreateView(APIView):
-    def post(self, request):
-        new_cat = Category.objects.create(
-            name = request.data['name'],
-            slug = request.data[slugify('name')].lower(),
-        )
-        return Response({'category': model_to_dict(new_cat)})
     
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method delete not allowed"})
+        try:
+            instance = Category.objects.get(pk=pk)
+            instance.delete()
+        except:
+            return Response({"error": "Object does not exist"})
+        return Response({"category": "Successfully delete" + str(pk)})
 
-class CategoryDeleteView(APIView):
-    def post(self, request):
-        del_cat = Category.objects.filter(
-            id = request.data['id'],
-        )
-        return Response(del_cat.delete())
-'''
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method put not allowed"})
+        try:
+            instance = Category.objects.get(pk=pk)
+        except:
+            return Response({"error": "Method put not allowed"})
+        
+        serializer = CategorySerializer2(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"category": serializer.data})
+

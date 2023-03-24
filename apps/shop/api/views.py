@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.forms import model_to_dict
 # Local
 from ..models import Category, Product, Comment
-from .serializers import CategorySerializer, ProductSerializer, CategorySerializer2
+from .serializers import CategorySerializer, ProductSerializer, CategorySerializer2, ProductSerializer2
 
 class CategoryListView(generics.ListAPIView):
     queryset = Category.objects.all()
@@ -62,3 +62,39 @@ class CategoryAPIView(APIView):
         serializer.save()
         return Response({"category": serializer.data})
 
+
+class ProductAPIView(APIView):
+    def get(self, request):
+        product = Product.objects.all()
+        return Response({"product": ProductSerializer2(product, many=True).data})
+    
+    def post(self, request):
+        serializer = ProductSerializer2(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"product": serializer.data})
+
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method delete not allowed"})
+        try:
+            instance = Product.objects.get(pk=pk)
+            instance.delete()
+        except:
+            return Response({"error": "Object does not exist"})
+        return Response({"product": "Successfully delete" + str(pk)})
+
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method put not allowed"})
+        try:
+            instance = Product.objects.get(pk=pk)
+        except:
+            return Response({"error": "Method put not allowed"})
+        
+        serializer = ProductSerializer2(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"product": serializer.data})

@@ -45,5 +45,6 @@ class ProductSerializer2(serializers.Serializer):
         instance.slug = validated_data.get("slug", instance.slug)
         instance.created = validated_data.get("created", instance.created)
         instance.updated = validated_data.get("updated", instance.updated)
+        category_id = validated_data.get("category_id", instance.category_id)
         instance.save()
         return instance

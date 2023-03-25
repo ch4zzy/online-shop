@@ -29,7 +29,7 @@ urlpatterns = [
     path('', include('apps.shop.urls', namespace='shop')),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('api/shop/', include('apps.shop.api.urls', namespace='api')),
-    path('api/account/', include('apps.account.api.urls', namespace='api')),
+    path('api/account/', include('apps.account.api.urls', namespace='api_cat')),
 ]
 
 

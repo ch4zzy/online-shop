@@ -19,7 +19,7 @@ class CategorySerializer2(serializers.Serializer):
     
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
-        instance.slug = validated_data.get("slug", instance.slug)
+        instance.slug = validated_data.get(instance.name, slugify(instance.slug).lower())
         instance.save()
         return instance
 
@@ -42,7 +42,7 @@ class ProductSerializer2(serializers.Serializer):
     
     def update(self, instance, validated_data):
         instance.name = validated_data.get("name", instance.name)
-        instance.slug = validated_data.get("slug", instance.slug)
+        instance.slug = validated_data.get(instance.name, slugify(instance.slug).lower())
         instance.created = validated_data.get("created", instance.created)
         instance.updated = validated_data.get("updated", instance.updated)
         category_id = validated_data.get("category_id", instance.category_id)

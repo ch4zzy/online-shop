@@ -95,8 +95,8 @@ DATABASES = {
         'NAME': env('DB_NAME'),
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env.int('DB_PORT')
+        #'HOST': env('DB_HOST'),
+        #'PORT': env.int('DB_PORT')
     }
 }
 
@@ -141,6 +141,8 @@ USE_L10N = True
 # STATIC config
 STATIC_URL = os.path.join(BASE_DIR, '/static/')
 STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+STATIC_PDF = os.path.join(BASE_DIR, 'static/')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # STATIC config end

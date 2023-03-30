@@ -16,8 +16,13 @@ from apps.cart.cart import Cart
 
 def order_create(request):
     cart = Cart(request)
-    current_user = request.user
-    if current_user.is_authenticated:
+    user = request.user
+    initial_data = {
+                'first_name': user.first_name, 
+                'email': user.email,
+            }
+    if request.user.is_authenticated:
+    
         if request.method == 'POST':
             form = OrderCreateForm(request.POST)
             if form.is_valid():
@@ -36,7 +41,7 @@ def order_create(request):
                 request.session['order_id'] = order.id
                 return redirect(reverse('payment:process'))
         else:
-            form = OrderCreateForm()
+            form = OrderCreateForm(initial=initial_data)
     else: 
         return redirect('login')
     return render(request,

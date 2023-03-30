@@ -20,7 +20,7 @@ def order_create(request):
     initial_data = {
                 'first_name': user.first_name, 
                 'email': user.email,
-            }
+        }
     if request.user.is_authenticated:
     
         if request.method == 'POST':

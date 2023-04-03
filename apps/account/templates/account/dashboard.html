@@ -5,10 +5,41 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Your account</h1>
+    <h1>Welcome {{ user.first_name }}</h1>
     <p>
         Welcome to your dashboard.
         You can <a href="{% url "edit" %}">edit your profile</a> or
         <a href="{% url "password_change" %}">change your password</a>.
     </p>
+    <h1>Your orders</h1>
+        <h2>Paid</h2>
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Link for detail</th>
+            </tr>
+        {% for order in orders_paid %}
+            <tr>
+                <th>{{ order.id }}</th>
+                <th>{{ order.created }}</th>
+                <th>blank</th>
+            </tr>
+        {% endfor %}
+        </table>
+        <h2>Unpaid</h2>
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Link for detail</th>
+            </tr>
+        {% for order in orders_unpaid %}
+            <tr>
+                <th>{{ order.id }}</th>
+                <th>{{ order.created }}</th>
+                <th>blank</th>
+            </tr>
+        {% endfor %}
+        </table>
 {% endblock %}

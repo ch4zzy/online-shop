@@ -3,12 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.contrib.auth.models import User
 
 # Local
 from .forms import LoginForm, UserRegistration, UserEditForm, ProfileEditForm
 from .models import Profile
-
+from apps.orders.models import Order
 
 # Create your views here.
 
@@ -38,7 +38,17 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    if request.method == 'GET':
+        user = request.user
+        orders = Order.objects.filter(email=user.email)
+        orders_paid = orders.filter(paid=True)
+        orders_unpaid = orders.filter(paid=False)
+        return render(request, 
+                      'account/dashboard.html', 
+                      {'orders': orders,
+                       'user': user,
+                       'orders_paid': orders_paid,
+                       'orders_unpaid': orders_unpaid})
 
 
 def register(request):

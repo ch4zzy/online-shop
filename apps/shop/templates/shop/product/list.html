@@ -26,15 +26,29 @@
     </div>
     <div id="main" class="product-list">
         <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
-        {% for product in products %}
-            <div class="item">
-                <a href="{{ product.get_absolute_url }}">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/img.png" %}{% endif %}">
-                </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                <br>
-            ${{ product.price }}
-            </div>
-        {% endfor %}
+        {% if products_search %}
+            <h2>Search result for "{{ query }}"</h2>
+            {% for product in products_search %}
+                <div class="item">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/img.png" %}{% endif %}">
+                    </a>
+                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                    <br>
+                ${{ product.price }}
+                </div>
+            {% endfor %}
+        {% else %}
+            {% for product in products %}
+                <div class="item">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/img.png" %}{% endif %}">
+                    </a>
+                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                    <br>
+                ${{ product.price }}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

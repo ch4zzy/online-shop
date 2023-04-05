@@ -48,3 +48,18 @@ def product_detail(request, id, slug):
          'new_comment': new_comment,
          'comment_form': comment_form}
     )
+
+
+def product_search(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            products_search = Product.objects.filter(name__icontains=query)
+            return render(request,
+                          'shop/product/list.html',
+                          {'products_search': products_search,
+                           'query': query})
+        else:
+            return render(request,
+                          'shop/product/list.html',
+                          {})

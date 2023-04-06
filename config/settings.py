@@ -226,10 +226,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # rest config
 REST_FRAMEWORK = {
-    'DEFAULT_MODEL_SERIALIZER_CLASS':
-        'rest_framework.serializers.HyperlinkedModelSerializer',
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
 }
 

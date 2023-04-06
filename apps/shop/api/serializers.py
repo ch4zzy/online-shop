@@ -1,50 +1,25 @@
 from rest_framework import serializers
-from django.utils.text import slugify
+
 # Local 
 from ..models import Category, Product, Comment
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Category
-        fields = ('id', 'name', 'slug', )
-
-
-class CategorySerializer2(serializers.Serializer):
-    name = serializers.CharField(max_length=255)
-    slug = serializers.SlugField(max_length=255)
-
-    def create(self, validated_data):
-        return Category.objects.create(**validated_data)
-    
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get("name", instance.name)
-        instance.slug = validated_data.get(instance.name, slugify(instance.slug).lower())
-        instance.save()
-        return instance
+        fields = "__all__"
 
 
 class ProductSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Product
-        fields = ('id', 'category', 'name', 'slug', 'description', 'price', 'available', )
+        fields = "__all__"
 
-class ProductSerializer2(serializers.Serializer):
-    name = serializers.CharField(max_length=255)
-    slug = serializers.SlugField(max_length=255)
-    price = serializers.DecimalField(max_digits=10, decimal_places=2)
-    created = serializers.DateTimeField(read_only=True)
-    updated = serializers.DateTimeField(read_only=True)
-    category_id = serializers.IntegerField()
 
-    def create(self, validated_data):
-        return Product.objects.create(**validated_data)
-    
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get("name", instance.name)
-        instance.slug = validated_data.get(instance.name, slugify(instance.slug).lower())
-        instance.created = validated_data.get("created", instance.created)
-        instance.updated = validated_data.get("updated", instance.updated)
-        category_id = validated_data.get("category_id", instance.category_id)
-        instance.save()
-        return instance
+class CommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Comment
+        fields = "__all__"

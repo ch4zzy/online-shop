@@ -1,14 +1,16 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
 # Local
 from . import views
 
 app_name = 'shop'
+router = routers.SimpleRouter()
+router.register(r'category', views.CategoryViewSet)
+router.register(r'product', views.ProductViewSet)
+router.register(r'comment', views.CommentViewSet)
 
 
 urlpatterns = [
-    path('category/', views.CategoryAPIView.as_view()),
-    path('category/<int:pk>/', views.CategoryAPIView.as_view()),
-    path('product/', views.ProductAPIView.as_view()),
-    path('product/<int:pk>', views.ProductAPIView.as_view()),
+    path('', include(router.urls)),
 ]

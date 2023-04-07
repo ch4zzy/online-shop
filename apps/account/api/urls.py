@@ -1,11 +1,12 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers, urls
 
 # Local
 from . import views
 app_name = 'account'
-
+router = routers.SimpleRouter()
+router.register(r'account', views.AccountViewSet)
 
 urlpatterns = [
-    path('profile/', views.ProfileAPIView.as_view()),
-    path('profile/<int:pk>/', views.ProfileAPIView.as_view()),
+    path('', include(router.urls)),
 ]

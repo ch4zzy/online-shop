@@ -1,0 +1,12 @@
+from rest_framework import generics, viewsets
+
+# Local
+from ..models import Order, OrderItem
+from .serializers import OrderSerializer, OrderItemSerializer
+from .permissions import IsAdminOrReadOnly
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (IsAdminOrReadOnly, )

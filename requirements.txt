@@ -14,3 +14,4 @@ python-jose>=3.0.0
 gunicorn==19.9.0
 djangorestframework==3.10.0
 djoser==2.1.0
+django-rest-swagger==2.2.0

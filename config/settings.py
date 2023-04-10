@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'social_django',
     'crispy_forms',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 
     # Local
     'apps.account',
@@ -228,7 +230,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
 }
 
 # rest config end

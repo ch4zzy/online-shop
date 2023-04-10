@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Local
 from .forms import CommentForm
@@ -31,14 +31,18 @@ def product_detail(request, id, slug):
     post = product
     comments = post.comments.filter(active=True)
     new_comment = None
-    if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid:
-            new_comment = comment_form.save(commit=False)
-            new_comment.post = post
-            new_comment.save()
-    else:
-        comment_form = CommentForm()
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            comment_form = CommentForm(data=request.POST)
+            if comment_form.is_valid:
+                new_comment = comment_form.save(commit=False)
+                new_comment.post = post
+                new_comment.user_id = request.user.id
+                new_comment.save()
+        else:
+            comment_form = CommentForm()
+    else: 
+        return redirect('login')
     return render(
         request,
         'shop/product/detail.html',

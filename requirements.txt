@@ -3,7 +3,7 @@ Django==2.2.7
 sqlparse==0.4.3
 django-environ==0.10.0
 Pillow==9.4.0
-social-auth-app-django==2.1.0
+social-auth-app-django==4.0.0
 celery==4.4.2
 flower==0.9.3
 braintree==3.45.0
@@ -12,4 +12,5 @@ django-crispy-forms==1.8.0
 psycopg2-binary==2.9.5
 python-jose>=3.0.0
 gunicorn==19.9.0
-djangorestframework==3.7.7
+djangorestframework==3.10.0
+djoser==2.1.0

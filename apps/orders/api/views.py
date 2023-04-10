@@ -2,7 +2,7 @@ from rest_framework import generics, viewsets
 
 # Local
 from ..models import Order, OrderItem
-from .serializers import OrderSerializer, OrderItemSerializer
+from .serializers import OrderSerializer
 from .permissions import IsAdminOrReadOnly
 
 

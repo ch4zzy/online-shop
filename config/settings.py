@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'rest_framework',
     'rest_framework.authtoken',
+    'drf_yasg',
     'djoser',
 
     # Local

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Social auth
     'social_django',
     'crispy_forms',
+    'crispy_bootstrap4',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',

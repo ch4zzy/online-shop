@@ -242,3 +242,5 @@ REST_FRAMEWORK = {
 }
 
 # rest config end
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'

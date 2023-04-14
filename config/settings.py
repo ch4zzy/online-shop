@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
 
 import os
 import environ

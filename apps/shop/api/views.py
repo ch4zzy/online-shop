@@ -1,7 +1,7 @@
 from rest_framework import generics, viewsets
 
 # Local
-from ..models import Category, Product, Comment
+from apps.shop.models import Category, Product, Comment
 from .serializers import CategorySerializer, ProductSerializer, CommentSerializer
 from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 

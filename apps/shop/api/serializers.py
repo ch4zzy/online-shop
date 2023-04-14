@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 # Local 
-from ..models import Category, Product, Comment
+from apps.shop.models import Category, Product, Comment
 
 
 class CategorySerializer(serializers.ModelSerializer):

@@ -4,8 +4,8 @@ from django.views.decorators.http import require_POST
 # Local
 from apps.shop.models import Product
 from apps.coupons.forms import CouponApplyForm
-from .cart import Cart
-from .forms import CartAddProductForm
+from apps.cart.cart import Cart
+from apps.cart.forms import CartAddProductForm
 
 
 @require_POST

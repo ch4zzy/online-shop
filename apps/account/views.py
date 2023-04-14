@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # Local
-from .forms import LoginForm, UserRegistration, UserEditForm, ProfileEditForm
-from .models import Profile
+from apps.account.forms import LoginForm, UserRegistration, UserEditForm, ProfileEditForm
+from apps.account.models import Profile
 from apps.orders.models import Order
 
 

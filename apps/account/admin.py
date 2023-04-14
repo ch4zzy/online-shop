@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Local
-from .models import Profile
+from apps.account.models import Profile
 
 
 @admin.register(Profile)

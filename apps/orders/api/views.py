@@ -2,8 +2,8 @@ from rest_framework import generics, viewsets
 
 # Local
 from apps.orders.models import Order, OrderItem
-from .serializers import OrderSerializer
-from .permissions import IsAdminOrReadOnly
+from apps.orders.api.serializers import OrderSerializer
+from apps.orders.api.permissions import IsAdminOrReadOnly
 
 
 class OrderViewSet(viewsets.ModelViewSet):

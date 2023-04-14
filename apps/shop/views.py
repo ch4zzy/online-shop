@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Local
-from .forms import CommentForm
-from .models import Category, Product
+from apps.shop.forms import CommentForm
+from apps.shop.models import Category, Product
 from apps.cart.forms import CartAddProductForm
 
 

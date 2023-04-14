@@ -9,9 +9,9 @@ from django.template.loader import render_to_string
 import weasyprint
 
 # Local
-from .models import OrderItem, Order
-from .forms import OrderCreateForm
-from .tasks import order_created
+from apps.orders.models import OrderItem, Order
+from apps.orders.forms import OrderCreateForm
+from apps.orders.tasks import order_created
 from apps.cart.cart import Cart
 
 

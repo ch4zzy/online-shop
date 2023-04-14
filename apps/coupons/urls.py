@@ -1,7 +1,7 @@
 from django.urls import path
 
 # Local
-from . import views
+from apps.coupons import views
 
 
 app_name = 'coupons'

@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 # Local
-from . import views
+from apps.shop.api import views
 
 
 app_name = 'shop'

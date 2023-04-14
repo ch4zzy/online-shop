@@ -1,5 +1,7 @@
 from django.urls import path
-from . import views
+
+# Local
+from apps.payment import views
 
 
 app_name = 'payment'

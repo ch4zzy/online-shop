@@ -7,7 +7,7 @@ import csv
 import datetime
 
 # Local
-from .models import Order, OrderItem
+from apps.orders.models import Order, OrderItem
 
 
 class OrderItemInline(admin.TabularInline):

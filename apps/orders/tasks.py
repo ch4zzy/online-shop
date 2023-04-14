@@ -1,7 +1,8 @@
 from celery import shared_task
 from django.core.mail import send_mail
+
 # Local
-from .models import Order
+from apps.orders.models import Order
 
 
 @shared_task

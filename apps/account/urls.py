@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
 # Local
-from . import views
+from apps.account import views
 
 
 urlpatterns = [

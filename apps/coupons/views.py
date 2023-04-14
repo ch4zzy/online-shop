@@ -3,8 +3,8 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 # Local
-from .models import Coupon
-from .forms import CouponApplyForm
+from apps.coupons.models import Coupon
+from apps.coupons.forms import CouponApplyForm
 
 
 @require_POST

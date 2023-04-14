@@ -14,8 +14,6 @@ from .forms import OrderCreateForm
 from .tasks import order_created
 from apps.cart.cart import Cart
 
-# Create your views here.
-
 
 def order_create(request):
     cart = Cart(request)

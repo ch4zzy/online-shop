@@ -3,7 +3,10 @@ from rest_framework import routers, urls
 
 # Local
 from . import views
+
+
 app_name = 'account'
+
 router = routers.SimpleRouter()
 router.register(r'account', views.AccountViewSet)
 

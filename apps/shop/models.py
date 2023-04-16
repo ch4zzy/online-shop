@@ -47,8 +47,16 @@ class Product(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user')
+    post = models.ForeignKey(
+        Product, 
+        on_delete=models.CASCADE, 
+        related_name='comments',
+    )
+    user = models.ForeignKey(
+        User, 
+        on_delete=models.CASCADE, 
+        verbose_name='user'
+    )
     name = models.CharField(max_length=64)
     email = models.EmailField()
     body = models.TextField()

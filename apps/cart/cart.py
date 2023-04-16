@@ -34,7 +34,10 @@ class Cart(object):
     def add(self, product, quantity=1, override_quantity=False):
         product_id = str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
+            self.cart[product_id] = {
+                'quantity': 0, 
+                'price': str(product.price)
+                }
         if override_quantity:
             self.cart[product_id]['quantity'] = quantity
         else:
@@ -68,7 +71,8 @@ class Cart(object):
     
     def get_discount(self):
         if self.coupon:
-            return (self.coupon.discount / Decimal('100') * self.get_total_price())
+            return (self.coupon.discount / Decimal('100') \
+                    * self.get_total_price())
         return Decimal('0')
     
     def get_total_price_after_discount(self):

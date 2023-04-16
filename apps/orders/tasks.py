@@ -9,8 +9,9 @@ from apps.orders.models import Order
 def order_created(order_id):
     order = Order.objects.get(id=order_id)
     subject = f'Order nr. {order.id}'
-    message = f'Dear {order.first_name},\n\n You have successfully placed an order.\
-                Your order id is {order.id}.'
+    message = f'Dear {order.first_name},\n\n\
+          You have successfully placed an order.\
+          Your order id is {order.id}.'
     mail_sent = send_mail(
         subject, 
         message,

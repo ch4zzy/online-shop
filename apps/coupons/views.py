@@ -9,6 +9,15 @@ from apps.coupons.forms import CouponApplyForm
 
 @require_POST
 def coupon_apply(request):
+    """
+    Apply a coupon to the current cart session if it is valid and active.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: A redirect to the cart detail page after applying the coupon.
+    """
     now = timezone.now()
     form = CouponApplyForm(request.POST)
     if form.is_valid():

@@ -10,6 +10,16 @@ from apps.cart.forms import CartAddProductForm
 
 @require_POST
 def cart_add(request, product_id):
+    """
+    View function to add a product to the cart.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to add to the cart.
+
+    Returns:
+        HttpResponseRedirect: A redirect to the cart detail page.
+    """
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     form = CartAddProductForm(request.POST)
@@ -22,6 +32,16 @@ def cart_add(request, product_id):
 
 
 def cart_remove(request, product_id):
+    """
+    View function to remove a product from the cart.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        product_id (int): The ID of the product to remove from the cart.
+
+    Returns:
+        HttpResponseRedirect: A redirect to the cart detail page.
+    """
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
@@ -29,6 +49,15 @@ def cart_remove(request, product_id):
 
 
 def cart_detail(request):
+    """
+    View function to display the contents of the cart.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response object.
+    """
     cart = Cart(request)
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(

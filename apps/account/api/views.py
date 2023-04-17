@@ -7,6 +7,9 @@ from apps.account.api.permissions import IsAdminOrReadOnly
 
 
 class AccountViewSet(viewsets.ModelViewSet):
+    """
+    A viewset that provides CRUD operations for User model.
+    """
     queryset = User.objects.all()
     serializer_class = AccountSerializer
     permission_classes = (IsAdminOrReadOnly, )

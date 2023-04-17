@@ -16,6 +16,23 @@ from apps.cart.cart import Cart
 
 
 def order_create(request):
+    """
+    View function that handles the creation of orders.
+
+    If the user is authenticated, the view displays a form for creating a new order, pre-populated with
+    the user's name and email. The view handles POST requests submitted by the form, validates the form data,
+    and creates a new order and corresponding OrderItems if the form is valid.
+
+    If the user is not authenticated, the view redirects them to the login page.
+
+    After successfully creating a new order, the view schedules an asynchronous task to send a confirmation email
+    to the user and redirects the user to the payment page.
+
+    Returns:
+        A rendered template displaying the order form and the contents of the user's cart.
+
+        If the request method is not POST and the user is not authenticated, a redirect to the login page.
+    """
     cart = Cart(request)
     user = request.user
     initial_data = {
@@ -57,6 +74,16 @@ def order_create(request):
 
 @login_required
 def user_order_detail(request, order_id):
+    """
+    View function that displays the details of a user's order.
+
+    If the user is not authenticated, the view redirects them to the login page.
+
+    Returns:
+        A rendered template displaying the details of the specified order.
+
+        If the user is not authenticated, a redirect to the login page.
+    """
     order = get_object_or_404(Order, id=order_id)
     return render(
         request, 'orders/order/detail.html',
@@ -68,6 +95,16 @@ def user_order_detail(request, order_id):
 
 @staff_member_required
 def admin_order_detail(request, order_id):
+    """
+    View function that displays the details of an order for an admin user.
+
+    If the user is not authenticated as an admin user, the view redirects them to the login page.
+
+    Returns:
+        A rendered template displaying the details of the specified order.
+
+        If the user is not authenticated as an admin user, a redirect to the login page.
+    """
     order = get_object_or_404(Order, id=order_id)
     return render(
         request, 'admin/orders/order/detail.html',
@@ -79,6 +116,16 @@ def admin_order_detail(request, order_id):
 
 @staff_member_required
 def admin_order_pdf(request, order_id):
+    """
+    Generate a PDF version of an order for staff members.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        order_id (int): The ID of the order to generate a PDF for.
+
+    Returns:
+        HttpResponse: A PDF file containing the order information.
+    """
     order = get_object_or_404(Order, id=order_id)
     html = render_to_string('orders/order/pdf.html',
                             {'order': order})

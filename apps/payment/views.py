@@ -11,6 +11,24 @@ from apps.orders.models import Order
 
 
 def payment_process(request):
+    """
+    Handle payment processing for orders.
+
+    If the request method is POST, get the payment method nonce and use it to charge the order amount with Braintree.
+    If the transaction is successful, mark the order as paid and send an email with the order invoice attached as a PDF.
+    Redirect to the payment done page.
+    If the transaction fails, redirect to the payment canceled page.
+
+    If the request method is GET, generate a client token for the Braintree drop-in UI and render the payment processing page.
+
+    Parameters:
+    - request: HTTP request object containing session data and form data
+
+    Returns:
+    - If the request method is POST and the transaction is successful, redirect to the payment done page.
+    - If the request method is POST and the transaction fails, redirect to the payment canceled page.
+    - If the request method is GET, render the payment processing page with a client token for Braintree.
+    """
     order_id = request.session.get('order_id')
     order = get_object_or_404(Order, id=order_id)
 
@@ -57,8 +75,26 @@ def payment_process(request):
 
 
 def payment_done(request):
+    """
+    Render the payment done page.
+
+    Parameters:
+    - request: HTTP request object
+
+    Returns:
+    - Rendered payment done page template
+    """
     return render(request, 'payment/done.html')
 
 
 def payment_canceled(request):
+    """
+    Render the payment canceled page.
+
+    Parameters:
+    - request: HTTP request object
+
+    Returns:
+    - Rendered payment canceled page template
+    """
     return render(request, 'payment/canceled.html')

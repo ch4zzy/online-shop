@@ -7,6 +7,17 @@ from apps.cart.forms import CartAddProductForm
 
 
 def product_list(request, category_slug=None):
+    """
+    View that displays the list of available products or products belonging to a specific category.
+
+    Parameters:
+    request (HttpRequest): The HTTP request object.
+    category_slug (str, optional): The slug of the category to filter by. Defaults to None.
+
+    Returns:
+    HttpResponse: The HTTP response object that contains the rendered template.
+
+    """
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
@@ -24,6 +35,18 @@ def product_list(request, category_slug=None):
 
 
 def product_detail(request, id, slug):
+    """
+    View that displays the details of a specific product, including its comments and allows authenticated users to add a comment.
+
+    Parameters:
+    request (HttpRequest): The HTTP request object.
+    id (int): The id of the product to display.
+    slug (str): The slug of the product to display.
+
+    Returns:
+    HttpResponse: The HTTP response object that contains the rendered template.
+
+    """
     template_name = 'product_detail.html'
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
@@ -56,6 +79,16 @@ def product_detail(request, id, slug):
 
 
 def product_search(request):
+    """
+    View that searches for products based on a query string and displays the results.
+
+    Parameters:
+    request (HttpRequest): The HTTP request object.
+
+    Returns:
+    HttpResponse: The HTTP response object that contains the rendered template.
+
+    """
     if request.method == 'GET':
         query = request.GET.get('query')
         if query:

@@ -14,3 +14,6 @@ djangorestframework==3.14.0
 drf-yasg==1.21.5
 crispy-bootstrap4==2022.1
 djoser==2.1.0
+black==23.3.0
+flake8==6.0.0
+pre-commit==3.2.2

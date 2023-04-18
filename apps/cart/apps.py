@@ -7,4 +7,5 @@ class CartConfig(AppConfig):
 
     The name attribute is set to 'apps.cart'.
     """
-    name = 'apps.cart'
+
+    name = "apps.cart"

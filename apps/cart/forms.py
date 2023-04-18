@@ -15,12 +15,6 @@ class CartAddProductForm(forms.Form):
         A field indicating whether to update the quantity of the product
         if it is already in the cart.
     """
-    quantity = forms.TypedChoiceField(
-        choices=PRODUCT_QUANTITY_CHOICES, 
-        coerce=int
-    )
-    update = forms.BooleanField(
-        required=False,
-        initial=False,
-        widget=forms.HiddenInput
-    )
+
+    quantity = forms.TypedChoiceField(choices=PRODUCT_QUANTITY_CHOICES, coerce=int)
+    update = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)

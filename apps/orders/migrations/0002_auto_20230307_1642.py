@@ -6,38 +6,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('orders', '0001_initial'),
+        ("orders", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='braintree_id',
+            model_name="order",
+            name="braintree_id",
             field=models.CharField(blank=True, max_length=150),
         ),
         migrations.AlterField(
-            model_name='order',
-            name='address',
+            model_name="order",
+            name="address",
             field=models.CharField(max_length=250),
         ),
         migrations.AlterField(
-            model_name='order',
-            name='city',
+            model_name="order",
+            name="city",
             field=models.CharField(max_length=100),
         ),
         migrations.AlterField(
-            model_name='order',
-            name='first_name',
+            model_name="order",
+            name="first_name",
             field=models.CharField(max_length=50),
         ),
         migrations.AlterField(
-            model_name='order',
-            name='last_name',
+            model_name="order",
+            name="last_name",
             field=models.CharField(max_length=50),
         ),
         migrations.AlterField(
-            model_name='order',
-            name='postal_code',
+            model_name="order",
+            name="postal_code",
             field=models.CharField(max_length=20),
         ),
     ]

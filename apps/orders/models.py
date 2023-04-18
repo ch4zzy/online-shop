@@ -1,11 +1,13 @@
 from decimal import Decimal
 
-from apps.coupons.models import Coupon
-# Local
-from apps.shop.models import Product
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
+
+from apps.coupons.models import Coupon
+
+# Local
+from apps.shop.models import Product
 
 
 class Order(models.Model):
@@ -31,6 +33,7 @@ class Order(models.Model):
         get_absolute_url(): The URL for the Order model.
         get_total_cost(): The total cost of the Order model.
     """
+
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
@@ -42,8 +45,8 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     braintree_id = models.CharField(max_length=150, blank=True)
     coupon = models.ForeignKey(
-        Coupon, 
-        related_name='orders',
+        Coupon,
+        related_name="orders",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -54,7 +57,7 @@ class Order(models.Model):
     )
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ("-created",)
 
     def __str__(self):
         """
@@ -63,8 +66,8 @@ class Order(models.Model):
         Returns:
             str: The string representation of the Order model.
         """
-        return f'Order {self.id}'
-    
+        return f"Order {self.id}"
+
     def get_absolute_url(self):
         """
         Returns the URL for the Order model.
@@ -72,7 +75,7 @@ class Order(models.Model):
         Returns:
             str: The URL for the Order model.
         """
-        return reverse('orders:user_order_detail', args=[self.id])
+        return reverse("orders:user_order_detail", args=[self.id])
 
     def get_total_cost(self):
         """
@@ -82,7 +85,7 @@ class Order(models.Model):
             decimal.Decimal: The total cost of the Order model.
         """
         total_cost = sum(item.get_cost() for item in self.items.all())
-        return total_cost - total_cost * (self.discount / Decimal('100'))
+        return total_cost - total_cost * (self.discount / Decimal("100"))
 
 
 class OrderItem(models.Model):
@@ -99,15 +102,14 @@ class OrderItem(models.Model):
         __str__(): Returns a string representation of the item.
         get_cost(): Returns the total cost of the item.
     """
+
     order = models.ForeignKey(
         Order,
-        related_name='items',
+        related_name="items",
         on_delete=models.CASCADE,
     )
     product = models.ForeignKey(
-        Product,
-        related_name='order_items',
-        on_delete=models.CASCADE
+        Product, related_name="order_items", on_delete=models.CASCADE
     )
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)

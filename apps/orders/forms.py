@@ -1,6 +1,7 @@
 # Local
-from apps.orders.models import Order
 from django import forms
+
+from apps.orders.models import Order
 
 
 class OrderCreateForm(forms.ModelForm):
@@ -22,7 +23,7 @@ class OrderCreateForm(forms.ModelForm):
     city : str
         City of the shipping address of the customer who placed the order.
     """
+
     class Meta:
         model = Order
-        fields = ['first_name', 'last_name', 'email',
-                  'address', 'postal_code', 'city']
+        fields = ["first_name", "last_name", "email", "address", "postal_code", "city"]

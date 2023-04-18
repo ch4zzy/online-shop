@@ -1,6 +1,7 @@
 # Local
-from apps.shop.models import Comment
 from django import forms
+
+from apps.shop.models import Comment
 
 
 class CommentForm(forms.ModelForm):
@@ -12,6 +13,7 @@ class CommentForm(forms.ModelForm):
             model (class): The model that the form is associated with.
             fields (tuple): A tuple of fields that the form contains.
     """
+
     class Meta:
         model = Comment
-        fields = ('name', 'email', 'body')
+        fields = ("name", "email", "body")

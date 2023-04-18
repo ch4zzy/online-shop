@@ -6,6 +6,7 @@ class Coupon(models.Model):
     """
     Model representing a coupon which can be applied to an order to give a discount.
     """
+
     code = models.CharField(max_length=20, unique=True)
     valid_from = models.DateTimeField()
     valid_to = models.DateTimeField()
@@ -15,7 +16,7 @@ class Coupon(models.Model):
     active = models.BooleanField()
 
     class Meta:
-        ordering = ('-valid_from', )
+        ordering = ("-valid_from",)
 
     def __str__(self):
         return self.code

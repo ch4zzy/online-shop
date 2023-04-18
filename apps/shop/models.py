@@ -16,13 +16,14 @@ class Category(models.Model):
         verbose_name (str): The human-readable name for a single object.
         verbose_name_plural (str): The human-readable name for multiple objects.
     """
+
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     class Meta:
-        ordering = ('name',)
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
+        ordering = ("name",)
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
 
     def __str__(self):
         """
@@ -34,8 +35,7 @@ class Category(models.Model):
         """
         Returns the URL to access a particular category instance.
         """
-        return reverse('shop:product_list_by_category', 
-                       args=[self.slug])
+        return reverse("shop:product_list_by_category", args=[self.slug])
 
 
 class Product(models.Model):
@@ -60,14 +60,13 @@ class Product(models.Model):
     Methods:
         get_absolute_url(): Returns the URL to access a detail record for this product.
     """
+
     category = models.ForeignKey(
-        Category,
-        related_name='products',
-        on_delete=models.CASCADE
+        Category, related_name="products", on_delete=models.CASCADE
     )
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, db_index=True)
-    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
+    image = models.ImageField(upload_to="products/%Y/%m/%d", blank=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
@@ -75,8 +74,8 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('name',)
-        index_together = (('id', 'slug'), )
+        ordering = ("name",)
+        index_together = (("id", "slug"),)
 
     def __str__(self):
         """
@@ -88,7 +87,7 @@ class Product(models.Model):
         """
         Returns the URL to access a particular product instance.
         """
-        return reverse('shop:product_detail', args=[self.id, self.slug])
+        return reverse("shop:product_detail", args=[self.id, self.slug])
 
 
 class Comment(models.Model):
@@ -110,16 +109,13 @@ class Comment(models.Model):
     Methods:
         __str__(): Returns a string representation of the comment, including the email of the user who wrote it.
     """
+
     post = models.ForeignKey(
-        Product, 
-        on_delete=models.CASCADE, 
-        related_name='comments',
+        Product,
+        on_delete=models.CASCADE,
+        related_name="comments",
     )
-    user = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE, 
-        verbose_name='user'
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="user")
     name = models.CharField(max_length=64)
     email = models.EmailField()
     body = models.TextField()
@@ -127,10 +123,10 @@ class Comment(models.Model):
     active = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ('created', )
+        ordering = ("created",)
 
     def __str__(self):
         """
         String representation of the comment object.
         """
-        return f'Comment by {self.email}'
+        return f"Comment by {self.email}"

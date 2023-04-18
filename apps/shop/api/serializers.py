@@ -1,6 +1,7 @@
-# Local 
-from apps.shop.models import Category, Comment, Product
+# Local
 from rest_framework import serializers
+
+from apps.shop.models import Category, Comment, Product
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -16,6 +17,7 @@ class CategorySerializer(serializers.ModelSerializer):
     slug : str
         The slug of the category.
     """
+
     class Meta:
         model = Category
         fields = "__all__"
@@ -48,6 +50,7 @@ class ProductSerializer(serializers.ModelSerializer):
     updated : datetime
         The date and time when the product was last updated.
     """
+
     class Meta:
         model = Product
         fields = "__all__"
@@ -76,6 +79,7 @@ class CommentSerializer(serializers.ModelSerializer):
     active : bool
         A flag indicating whether the comment is active or not.
     """
+
     class Meta:
         model = Comment
         fields = "__all__"

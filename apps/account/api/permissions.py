@@ -15,6 +15,7 @@ class IsAdminOrReadOnly(permissions.BasePermission):
             serializer_class = MyModelSerializer
             permission_classes = [IsAdminOrReadOnly]
     """
+
     def has_permission(self, request, view):
         """
         Returns True if the request method is safe (GET, HEAD, OPTIONS) or if the
@@ -40,6 +41,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             permission_classes = [IsOwnerOrReadOnly]
 
     """
+
     def has_object_permission(self, request, view, obj):
         """
         Returns True if the request method is safe (GET, HEAD, OPTIONS) or if the

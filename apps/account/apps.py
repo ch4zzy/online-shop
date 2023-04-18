@@ -11,4 +11,5 @@ class AccountConfig(AppConfig):
     Attributes:
         name (str): The name of the app ('apps.account')
     """
-    name = 'apps.account'
+
+    name = "apps.account"

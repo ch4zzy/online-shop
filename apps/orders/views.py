@@ -1,9 +1,4 @@
 import weasyprint
-from apps.cart.cart import Cart
-from apps.orders.forms import OrderCreateForm
-# Local
-from apps.orders.models import Order, OrderItem
-from apps.orders.tasks import order_created
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
@@ -11,6 +6,13 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
+
+from apps.cart.cart import Cart
+from apps.orders.forms import OrderCreateForm
+
+# Local
+from apps.orders.models import Order, OrderItem
+from apps.orders.tasks import order_created
 
 
 def order_create(request):
@@ -34,11 +36,11 @@ def order_create(request):
     cart = Cart(request)
     user = request.user
     initial_data = {
-                'first_name': user.first_name, 
-                'email': user.email,
-        }
+        "first_name": user.first_name,
+        "email": user.email,
+    }
     if request.user.is_authenticated:
-        if request.method == 'POST':
+        if request.method == "POST":
             form = OrderCreateForm(request.POST)
             if form.is_valid():
                 order = form.save(commit=False)
@@ -49,24 +51,25 @@ def order_create(request):
                 for item in cart:
                     OrderItem.objects.create(
                         order=order,
-                        product=item['product'],
-                        price=item['price'],
-                        quantity=item['quantity']
+                        product=item["product"],
+                        price=item["price"],
+                        quantity=item["quantity"],
                     )
                 cart.clear()
                 order_created.delay(order.id)
-                request.session['order_id'] = order.id
-                return redirect(reverse('payment:process'))
+                request.session["order_id"] = order.id
+                return redirect(reverse("payment:process"))
         else:
             form = OrderCreateForm(initial=initial_data)
-    else: 
-        return redirect('login')
+    else:
+        return redirect("login")
     return render(
-        request, 'orders/order/create.html',
+        request,
+        "orders/order/create.html",
         {
-            'cart': cart, 
-            'form': form,
-        }
+            "cart": cart,
+            "form": form,
+        },
     )
 
 
@@ -84,10 +87,11 @@ def user_order_detail(request, order_id):
     """
     order = get_object_or_404(Order, id=order_id)
     return render(
-        request, 'orders/order/detail.html',
+        request,
+        "orders/order/detail.html",
         {
-            'order': order,
-        }
+            "order": order,
+        },
     )
 
 
@@ -105,10 +109,11 @@ def admin_order_detail(request, order_id):
     """
     order = get_object_or_404(Order, id=order_id)
     return render(
-        request, 'admin/orders/order/detail.html',
+        request,
+        "admin/orders/order/detail.html",
         {
-            'order': order,
-        }
+            "order": order,
+        },
     )
 
 
@@ -125,11 +130,10 @@ def admin_order_pdf(request, order_id):
         HttpResponse: A PDF file containing the order information.
     """
     order = get_object_or_404(Order, id=order_id)
-    html = render_to_string('orders/order/pdf.html',
-                            {'order': order})
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'filename="order_{order.id}.pdf"'
+    html = render_to_string("orders/order/pdf.html", {"order": order})
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = f'filename="order_{order.id}.pdf"'
     weasyprint.HTML(string=html).write_pdf(
-        response, 
-        stylesheets=[weasyprint.CSS(settings.STATIC_PDF + '/css/pdf.css')])
+        response, stylesheets=[weasyprint.CSS(settings.STATIC_PDF + "/css/pdf.css")]
+    )
     return response

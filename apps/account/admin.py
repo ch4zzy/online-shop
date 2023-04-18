@@ -11,9 +11,10 @@ Classes:
 
 """
 
+from django.contrib import admin
+
 # Local
 from apps.account.models import Profile
-from django.contrib import admin
 
 
 @admin.register(Profile)
@@ -25,4 +26,5 @@ class ProfileAdmin(admin.ModelAdmin):
         list_display (list): A list of fields to display in the admin interface.
 
     """
-    list_display = ['user', 'date_of_birth', 'photo']
+
+    list_display = ["user", "date_of_birth", "photo"]

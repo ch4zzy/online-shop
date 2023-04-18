@@ -8,4 +8,5 @@ class CouponApplyForm(forms.Form):
     Fields:
         code (CharField): the coupon code to apply.
     """
+
     code = forms.CharField()

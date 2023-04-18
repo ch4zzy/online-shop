@@ -1,9 +1,11 @@
 from decimal import Decimal
 
+from django.conf import settings
+
 from apps.coupons.models import Coupon
+
 # Local
 from apps.shop.models import Product
-from django.conf import settings
 
 
 class Cart(object):
@@ -28,6 +30,7 @@ class Cart(object):
     - get_discount(self): Returns the discount applied to the cart based on the coupon
     - get_total_price_after_discount(self): Returns the total price of all items in the cart after applying the coupon discount
     """
+
     def __init__(self, request):
         """
         Constructor that initializes the cart object.
@@ -40,7 +43,7 @@ class Cart(object):
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
-        self.coupon_id = self.session.get('coupon_id')
+        self.coupon_id = self.session.get("coupon_id")
 
     def __iter__(self):
         """
@@ -51,17 +54,17 @@ class Cart(object):
 
         cart = self.cart.copy()
         for product in products:
-            cart[str(product.id)]['product'] = product
+            cart[str(product.id)]["product"] = product
         for item in cart.values():
-            item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+            item["price"] = Decimal(item["price"])
+            item["total_price"] = item["price"] * item["quantity"]
             yield item
 
     def __len__(self):
         """
         Returns the total number of items in the cart.
         """
-        return sum(item['quantity'] for item in self.cart.values())
+        return sum(item["quantity"] for item in self.cart.values())
 
     def add(self, product, quantity=1, override_quantity=False):
         """
@@ -74,14 +77,11 @@ class Cart(object):
         """
         product_id = str(product.id)
         if product_id not in self.cart:
-            self.cart[product_id] = {
-                'quantity': 0, 
-                'price': str(product.price)
-                }
+            self.cart[product_id] = {"quantity": 0, "price": str(product.price)}
         if override_quantity:
-            self.cart[product_id]['quantity'] = quantity
+            self.cart[product_id]["quantity"] = quantity
         else:
-            self.cart[product_id]['quantity'] += quantity
+            self.cart[product_id]["quantity"] += quantity
         self.save()
 
     def save(self):
@@ -117,10 +117,9 @@ class Cart(object):
             Decimal: The total price.
         """
         return sum(
-            Decimal(item['price']) * item['quantity']
-            for item in self.cart.values()
+            Decimal(item["price"]) * item["quantity"] for item in self.cart.values()
         )
-    
+
     @property
     def coupon(self):
         """
@@ -132,7 +131,7 @@ class Cart(object):
         if self.coupon_id:
             return Coupon.objects.get(id=self.coupon_id)
         return None
-    
+
     def get_discount(self):
         """
         Calculate the discount amount based on the coupon associated with the cart.
@@ -141,10 +140,9 @@ class Cart(object):
             Decimal: The discount amount.
         """
         if self.coupon:
-            return (self.coupon.discount / Decimal('100') \
-                    * self.get_total_price())
-        return Decimal('0')
-    
+            return self.coupon.discount / Decimal("100") * self.get_total_price()
+        return Decimal("0")
+
     def get_total_price_after_discount(self):
         """
         Calculate the total price after applying the coupon discount.

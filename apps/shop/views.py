@@ -1,8 +1,10 @@
+from django.shortcuts import get_object_or_404, redirect, render
+
 from apps.cart.forms import CartAddProductForm
+
 # Local
 from apps.shop.forms import CommentForm
 from apps.shop.models import Category, Product
-from django.shortcuts import get_object_or_404, redirect, render
 
 
 def product_list(request, category_slug=None):
@@ -24,12 +26,13 @@ def product_list(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
     return render(
-        request, 'shop/product/list.html',
+        request,
+        "shop/product/list.html",
         {
-            'category': category,
-            'categories': categories,
-            'products': products,
-        }
+            "category": category,
+            "categories": categories,
+            "products": products,
+        },
     )
 
 
@@ -46,7 +49,7 @@ def product_detail(request, id, slug):
     HttpResponse: The HTTP response object that contains the rendered template.
 
     """
-    template_name = 'product_detail.html'
+    template_name = "product_detail.html"
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
 
@@ -54,7 +57,7 @@ def product_detail(request, id, slug):
     comments = post.comments.filter(active=True)
     new_comment = None
     if request.user.is_authenticated:
-        if request.method == 'POST':
+        if request.method == "POST":
             comment_form = CommentForm(data=request.POST)
             if comment_form.is_valid:
                 new_comment = comment_form.save(commit=False)
@@ -63,17 +66,18 @@ def product_detail(request, id, slug):
                 new_comment.save()
         else:
             comment_form = CommentForm()
-    else: 
-        return redirect('login')
+    else:
+        return redirect("login")
     return render(
-        request, 'shop/product/detail.html',
+        request,
+        "shop/product/detail.html",
         {
-            'product': product,
-            'cart_product_form': cart_product_form,
-            'comments': comments,
-            'new_comment': new_comment,
-            'comment_form': comment_form,
-        }
+            "product": product,
+            "cart_product_form": cart_product_form,
+            "comments": comments,
+            "new_comment": new_comment,
+            "comment_form": comment_form,
+        },
     )
 
 
@@ -88,19 +92,17 @@ def product_search(request):
     HttpResponse: The HTTP response object that contains the rendered template.
 
     """
-    if request.method == 'GET':
-        query = request.GET.get('query')
+    if request.method == "GET":
+        query = request.GET.get("query")
         if query:
             products_search = Product.objects.filter(name__icontains=query)
             return render(
-                request, 'shop/product/list.html',
+                request,
+                "shop/product/list.html",
                 {
-                    'products_search': products_search,
-                    'query': query,
-                }
+                    "products_search": products_search,
+                    "query": query,
+                },
             )
         else:
-            return render(
-                request, 'shop/product/list.html',
-                {}
-            )
+            return render(request, "shop/product/list.html", {})

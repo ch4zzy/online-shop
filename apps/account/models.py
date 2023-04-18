@@ -19,12 +19,10 @@ class Profile(models.Model):
         __str__(): Returns a string representation of the profile.
 
     """
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, 
-        on_delete=models.CASCADE
-    )
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_of_birth = models.DateTimeField(blank=True, null=True)
-    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+    photo = models.ImageField(upload_to="users/%Y/%m/%d/", blank=True)
 
     def __str__(self):
         """
@@ -37,4 +35,4 @@ class Profile(models.Model):
             str: A string representation of the profile.
 
         """
-        return 'Profile for user {}'.format(self.user.username)
+        return "Profile for user {}".format(self.user.username)

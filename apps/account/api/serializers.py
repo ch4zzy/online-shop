@@ -12,6 +12,7 @@ class AccountSerializer(serializers.ModelSerializer):
             fields (str[]): A list of all fields to include in the serialized output.
                 In this case, "__all__" is used to include all fields.
     """
+
     class Meta:
         model = User
         fields = "__all__"

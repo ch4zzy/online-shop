@@ -1,8 +1,10 @@
+from rest_framework import generics, viewsets
+
 from apps.orders.api.permissions import IsAdminOrReadOnly
 from apps.orders.api.serializers import OrderSerializer
+
 # Local
 from apps.orders.models import Order
-from rest_framework import generics, viewsets
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -24,6 +26,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     - Users with admin privileges can perform any operation.
     - Other users can only retrieve orders (read-only).
     """
+
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = (IsAdminOrReadOnly, )
+    permission_classes = (IsAdminOrReadOnly,)

@@ -7,4 +7,5 @@ class PaymentConfig(AppConfig):
 
     This class defines the name of the app as "apps.payment".
     """
-    name = 'apps.payment'
+
+    name = "apps.payment"

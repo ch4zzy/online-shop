@@ -1,14 +1,13 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-
 # Local
-from apps.account.forms import LoginForm, \
-    UserRegistration, UserEditForm, ProfileEditForm
+from apps.account.forms import (LoginForm, ProfileEditForm, UserEditForm,
+                                UserRegistration)
 from apps.account.models import Profile
 from apps.orders.models import Order
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def user_login(request):

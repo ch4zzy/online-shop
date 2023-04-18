@@ -1,7 +1,6 @@
-from django.urls import path
-
 # Local
 from apps.orders import views
+from django.urls import path
 
 app_name = 'orders'
 

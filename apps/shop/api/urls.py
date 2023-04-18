@@ -1,9 +1,7 @@
-from django.urls import path, include
-from rest_framework import routers
-
 # Local
 from apps.shop.api import views
-
+from django.urls import include, path
+from rest_framework import routers
 
 app_name = 'shop'
 

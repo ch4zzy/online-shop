@@ -1,7 +1,6 @@
-from django.contrib import admin
-
 # Local
-from apps.shop.models import Category, Product, Comment
+from apps.shop.models import Category, Comment, Product
+from django.contrib import admin
 
 
 @admin.register(Category)

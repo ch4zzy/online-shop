@@ -1,11 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_POST
-
-# Local
-from apps.shop.models import Product
-from apps.coupons.forms import CouponApplyForm
 from apps.cart.cart import Cart
 from apps.cart.forms import CartAddProductForm
+from apps.coupons.forms import CouponApplyForm
+# Local
+from apps.shop.models import Product
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
 
 @require_POST

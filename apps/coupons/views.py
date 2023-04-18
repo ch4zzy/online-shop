@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect
-from django.utils import timezone
-from django.views.decorators.http import require_POST
-
+from apps.coupons.forms import CouponApplyForm
 # Local
 from apps.coupons.models import Coupon
-from apps.coupons.forms import CouponApplyForm
+from django.shortcuts import redirect, render
+from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 
 @require_POST

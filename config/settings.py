@@ -9,12 +9,16 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+import os
+
 import django
+import environ
+# Braintree payments
+from braintree import Configuration, Environment
 from django.utils.encoding import force_str
+
 django.utils.encoding.force_text = force_str
 
-import os
-import environ
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 env = environ.Env()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -197,8 +201,6 @@ CART_SESSION_ID = 'cart'
 # Cart config end
 
 
-# Braintree payments
-from braintree import Configuration, Environment
 
 
 BRAINTREE_MERCHANT_ID = env('BRAINTREE_MERCHANT_ID')

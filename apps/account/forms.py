@@ -1,8 +1,7 @@
-from django import forms
-from django.contrib.auth.models import User
-
 # Local
 from apps.account.models import Profile
+from django import forms
+from django.contrib.auth.models import User
 
 
 class LoginForm(forms.Form):

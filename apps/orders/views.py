@@ -1,18 +1,16 @@
-from django.shortcuts import render,redirect
-from django.urls import reverse
+import weasyprint
+from apps.cart.cart import Cart
+from apps.orders.forms import OrderCreateForm
+# Local
+from apps.orders.models import Order, OrderItem
+from apps.orders.tasks import order_created
+from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
-from django.conf import settings
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
-import weasyprint
-
-# Local
-from apps.orders.models import OrderItem, Order
-from apps.orders.forms import OrderCreateForm
-from apps.orders.tasks import order_created
-from apps.cart.cart import Cart
+from django.urls import reverse
 
 
 def order_create(request):

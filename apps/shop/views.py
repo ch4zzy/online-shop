@@ -1,9 +1,8 @@
-from django.shortcuts import render, get_object_or_404, redirect
-
+from apps.cart.forms import CartAddProductForm
 # Local
 from apps.shop.forms import CommentForm
 from apps.shop.models import Category, Product
-from apps.cart.forms import CartAddProductForm
+from django.shortcuts import get_object_or_404, redirect, render
 
 
 def product_list(request, category_slug=None):

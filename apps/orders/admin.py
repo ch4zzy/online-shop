@@ -1,13 +1,12 @@
-from django.contrib import admin
-from django.http import HttpResponse
-from django.contrib import admin
-from django.urls import reverse
-from django.utils.safestring import mark_safe
 import csv
 import datetime
 
 # Local
 from apps.orders.models import Order, OrderItem
+from django.contrib import admin
+from django.http import HttpResponse
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 
 class OrderItemInline(admin.TabularInline):

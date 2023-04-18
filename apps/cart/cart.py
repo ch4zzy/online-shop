@@ -1,9 +1,9 @@
 from decimal import Decimal
-from django.conf import settings
 
+from apps.coupons.models import Coupon
 # Local
 from apps.shop.models import Product
-from apps.coupons.models import Coupon
+from django.conf import settings
 
 
 class Cart(object):

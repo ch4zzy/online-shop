@@ -1,7 +1,6 @@
-from django import forms
-
 # Local
 from apps.orders.models import Order
+from django import forms
 
 
 class OrderCreateForm(forms.ModelForm):

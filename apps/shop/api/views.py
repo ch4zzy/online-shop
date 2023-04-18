@@ -1,9 +1,9 @@
-from rest_framework import generics, viewsets
-
-# Local
-from apps.shop.models import Category, Product, Comment
-from apps.shop.api.serializers import CategorySerializer, ProductSerializer, CommentSerializer
 from apps.shop.api.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from apps.shop.api.serializers import (CategorySerializer, CommentSerializer,
+                                       ProductSerializer)
+# Local
+from apps.shop.models import Category, Comment, Product
+from rest_framework import generics, viewsets
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

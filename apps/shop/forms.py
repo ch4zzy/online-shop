@@ -1,7 +1,6 @@
-from django import forms
-
 # Local
 from apps.shop.models import Comment
+from django import forms
 
 
 class CommentForm(forms.ModelForm):

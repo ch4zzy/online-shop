@@ -1,7 +1,6 @@
-from django.contrib import admin
-
 # Local
 from apps.coupons.models import Coupon
+from django.contrib import admin
 
 
 class CouponAdmin(admin.ModelAdmin):

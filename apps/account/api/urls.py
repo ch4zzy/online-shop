@@ -1,9 +1,7 @@
-from django.urls import path, include
-from rest_framework import routers, urls
-
 # Local
 from apps.account.api import views
-
+from django.urls import include, path
+from rest_framework import routers, urls
 
 app_name = 'account'
 

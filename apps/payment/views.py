@@ -1,13 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
-from django.conf import settings
 from io import BytesIO
+
 import braintree
 import weasyprint
-
 # Local
 from apps.orders.models import Order
+from django.conf import settings
+from django.core.mail import EmailMessage
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 
 
 def payment_process(request):

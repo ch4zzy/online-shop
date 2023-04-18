@@ -1,8 +1,6 @@
-from django.urls import path
-
 # Local
 from apps.shop import views
-
+from django.urls import path
 
 app_name = 'shop'
 

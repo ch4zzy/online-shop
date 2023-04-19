@@ -25,8 +25,8 @@ def order_create(request):
 
     If the user is not authenticated, the view redirects them to the login page.
 
-    After successfully creating a new order, the view schedules an asynchronous task to send a confirmation email
-    to the user and redirects the user to the payment page.
+    After successfully creating a new order, the view schedules an asynchronous
+    task to send a confirmation email to the user and redirects the user to the payment page.
 
     Returns:
         A rendered template displaying the order form and the contents of the user's cart.

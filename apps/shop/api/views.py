@@ -1,4 +1,4 @@
-from rest_framework import generics, viewsets
+from rest_framework import viewsets
 
 from apps.shop.api.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from apps.shop.api.serializers import (

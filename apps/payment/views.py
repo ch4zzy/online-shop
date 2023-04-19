@@ -15,12 +15,15 @@ def payment_process(request):
     """
     Handle payment processing for orders.
 
-    If the request method is POST, get the payment method nonce and use it to charge the order amount with Braintree.
-    If the transaction is successful, mark the order as paid and send an email with the order invoice attached as a PDF.
+    If the request method is POST, get the payment method nonce and use it to charge the order
+        amount with Braintree.
+    If the transaction is successful, mark the order as paid and send an email with the order
+        invoice attached as a PDF.
     Redirect to the payment done page.
     If the transaction fails, redirect to the payment canceled page.
 
-    If the request method is GET, generate a client token for the Braintree drop-in UI and render the payment processing page.
+    If the request method is GET, generate a client token for the Braintree drop-in UI and
+        render the payment processing page.
 
     Parameters:
     - request: HTTP request object containing session data and form data
@@ -49,9 +52,7 @@ def payment_process(request):
             order.save()
             subject = f"Shop - Invoice no. {order.id}"
             message = "Please, find attached the invoice for your recent purchase."
-            email = EmailMessage(
-                subject, message, "smtp.payment@gmail.com", [order.email]
-            )
+            email = EmailMessage(subject, message, "smtp.payment@gmail.com", [order.email])
             html = render_to_string("orders/order/pdf.html", {"order": order})
             out = BytesIO()
             stylesheets = [weasyprint.CSS(settings.STATIC_ROOT + "css/pdf.css")]

@@ -28,7 +28,8 @@ class Cart(object):
     - get_total_price(self): Returns the total price of all items in the cart
     - coupon(self): Getter method for the coupon applied to the cart
     - get_discount(self): Returns the discount applied to the cart based on the coupon
-    - get_total_price_after_discount(self): Returns the total price of all items in the cart after applying the coupon discount
+    - get_total_price_after_discount(self): Returns the total price of all items in the cart
+        after applying the coupon discount
     """
 
     def __init__(self, request):
@@ -73,7 +74,8 @@ class Cart(object):
         Parameters:
         - product: the product to add
         - quantity: the quantity of the product to add (default=1)
-        - override_quantity: whether to override the quantity of an existing product in the cart (default=False)
+        - override_quantity: whether to override the quantity of an
+            existing product in the cart (default=False)
         """
         product_id = str(product.id)
         if product_id not in self.cart:
@@ -116,9 +118,7 @@ class Cart(object):
         Returns:
             Decimal: The total price.
         """
-        return sum(
-            Decimal(item["price"]) * item["quantity"] for item in self.cart.values()
-        )
+        return sum(Decimal(item["price"]) * item["quantity"] for item in self.cart.values())
 
     @property
     def coupon(self):

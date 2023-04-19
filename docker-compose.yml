@@ -1,7 +1,7 @@
 version: '3.9.16'
 
 services:
-  rabbitmq: 
+  rabbitmq:
     image: rabbitmq:3.10.7-management
     ports:
       - 5672:5672
@@ -9,13 +9,13 @@ services:
     volumes:
       - .:/code
       - static:/static
-    build: 
+    build:
       context: .
     ports:
       - 8000:8000
     depends_on:
       - db
-  db: 
+  db:
     image: postgres:14.7
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
@@ -31,7 +31,7 @@ services:
       - web
   celery:
     restart: always
-    build: . 
+    build: .
     command: celery -A config worker -l info
     volumes:
       - .:/code

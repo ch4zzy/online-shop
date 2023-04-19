@@ -38,7 +38,8 @@ def product_list(request, category_slug=None):
 
 def product_detail(request, id, slug):
     """
-    View that displays the details of a specific product, including its comments and allows authenticated users to add a comment.
+    View that displays the details of a specific product, including its comments and allows
+        authenticated users to add a comment.
 
     Parameters:
     request (HttpRequest): The HTTP request object.
@@ -49,7 +50,6 @@ def product_detail(request, id, slug):
     HttpResponse: The HTTP response object that contains the rendered template.
 
     """
-    template_name = "product_detail.html"
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
 

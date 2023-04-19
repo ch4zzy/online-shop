@@ -1,4 +1,4 @@
-from rest_framework import generics, viewsets
+from rest_framework import viewsets
 
 from apps.orders.api.permissions import IsAdminOrReadOnly
 from apps.orders.api.serializers import OrderSerializer

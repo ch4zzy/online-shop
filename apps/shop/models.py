@@ -61,9 +61,7 @@ class Product(models.Model):
         get_absolute_url(): Returns the URL to access a detail record for this product.
     """
 
-    category = models.ForeignKey(
-        Category, related_name="products", on_delete=models.CASCADE
-    )
+    category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, db_index=True)
     image = models.ImageField(upload_to="products/%Y/%m/%d", blank=True)
@@ -107,7 +105,8 @@ class Comment(models.Model):
         ordering (tuple): The default sorting for the model.
 
     Methods:
-        __str__(): Returns a string representation of the comment, including the email of the user who wrote it.
+        __str__(): Returns a string representation of the comment,
+            including the email of the user who wrote it.
     """
 
     post = models.ForeignKey(

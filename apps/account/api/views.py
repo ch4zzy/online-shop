@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from rest_framework import generics, viewsets
+from rest_framework import viewsets
 
 from apps.account.api.permissions import IsAdminOrReadOnly
 

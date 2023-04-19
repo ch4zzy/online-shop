@@ -36,11 +36,7 @@ def export_to_csv(modeladmin, request, queryset):
     response["Content-Disposition"] = "attachment;" f"filename={opts.verbose_name}.csv"
     writer = csv.writer(response)
 
-    fields = [
-        field
-        for field in opts.get_fields()
-        if not field.many_to_many and not field.one_to_many
-    ]
+    fields = [field for field in opts.get_fields() if not field.many_to_many and not field.one_to_many]
     writer.writerow([field.verbose_name for field in fields])
     for obj in queryset:
         data_row = []

@@ -1,6 +1,6 @@
 # Local
 from django.urls import include, path
-from rest_framework import routers, urls
+from rest_framework import routers
 
 from apps.account.api import views
 

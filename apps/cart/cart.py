@@ -8,7 +8,7 @@ from apps.coupons.models import Coupon
 from apps.shop.models import Product
 
 
-class Cart(object):
+class Cart:
     """
     Class representing a shopping cart for a user.
 

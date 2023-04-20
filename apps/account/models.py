@@ -35,4 +35,4 @@ class Profile(models.Model):
             str: A string representation of the profile.
 
         """
-        return "Profile for user {}".format(self.user.username)
+        return f"Profile for user {self.user.username}"

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 
 
-class EmailAuthBackend(object):
+class EmailAuthBackend:
     """
     Authenticates users based on their email address.
 

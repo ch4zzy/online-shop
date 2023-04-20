@@ -1,4 +1,6 @@
 from rest_framework import permissions
+from rest_framework.request import Request
+from rest_framework.views import View
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
@@ -16,7 +18,7 @@ class IsAdminOrReadOnly(permissions.BasePermission):
             permission_classes = [IsAdminOrReadOnly]
     """
 
-    def has_permission(self, request, view):
+    def has_permission(self, request: Request, view: View) -> bool:
         """
         Returns True if the request method is safe (GET, HEAD, OPTIONS) or if the
         requesting user is an admin. Returns False otherwise.
@@ -42,7 +44,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
     """
 
-    def has_object_permission(self, request, view, obj):
+    def has_object_permission(self, request: Request, view: View, obj: object) -> bool:
         """
         Returns True if the request method is safe (GET, HEAD, OPTIONS) or if the
         requesting user is the owner of the object. Returns False otherwise.

@@ -14,5 +14,5 @@ class AccountSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = User
-        fields = "__all__"
+        model: type = User
+        fields: list[str] = "__all__"

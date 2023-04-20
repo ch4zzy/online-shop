@@ -6,4 +6,4 @@ class ShopConfig(AppConfig):
     AppConfig class for the shop app.
     """
 
-    name = "apps.shop"
+    name: str = "apps.shop"

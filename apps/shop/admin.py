@@ -1,5 +1,6 @@
-# Local
 from django.contrib import admin
+from django.db.models.query import QuerySet
+from django.http import HttpRequest
 
 from apps.shop.models import Category, Comment, Product
 
@@ -17,8 +18,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
     """
 
-    list_display = ["name", "slug"]
-    prepopulated_fields = {"slug": ("name",)}
+    list_display: tuple = ["name", "slug"]
+    prepopulated_fields: dict = {"slug": ("name",)}
 
 
 @admin.register(Product)
@@ -38,9 +39,9 @@ class ProductAdmin(admin.ModelAdmin):
 
     """
 
-    list_display = ["name", "slug", "price", "available", "created", "updated"]
-    list_filter = ["available", "created", "updated"]
-    list_editable = ["price", "available"]
+    list_display: tuple = ("name", "slug", "price", "available", "created", "updated")
+    list_filter: tuple = ("available", "created", "updated")
+    list_editable: tuple = ("price", "available")
     prepopulated_fields = {"slug": ("name",)}
 
 
@@ -61,12 +62,12 @@ class CommentAdmin(admin.ModelAdmin):
 
     """
 
-    list_display = ("name", "body", "post", "created", "active")
-    list_filter = ("active", "created")
-    search_fields = ("name", "email")
-    actions = ["approve_comments"]
+    list_display: tuple = ("name", "body", "post", "created", "active")
+    list_filter: tuple = ("active", "created")
+    search_fields: tuple = ("name", "email")
+    actions: tuple = "approve_comments"
 
-    def approve_comments(self, request, queryset):
+    def approve_comments(self, request: HttpRequest, queryset: QuerySet) -> None:
         """
         Approves selected comments in the admin interface.
 

@@ -17,21 +17,21 @@ class Category(models.Model):
         verbose_name_plural (str): The human-readable name for multiple objects.
     """
 
-    name = models.CharField(max_length=255, db_index=True)
-    slug = models.SlugField(max_length=255, unique=True)
+    name: str = models.CharField(max_length=255, db_index=True)
+    slug: str = models.SlugField(max_length=255, unique=True)
 
     class Meta:
-        ordering = ("name",)
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
+        ordering: tuple = ("name",)
+        verbose_name: str = "Category"
+        verbose_name_plural: str = "Categories"
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String representation of the category object.
         """
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         """
         Returns the URL to access a particular category instance.
         """
@@ -61,27 +61,27 @@ class Product(models.Model):
         get_absolute_url(): Returns the URL to access a detail record for this product.
     """
 
-    category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
-    name = models.CharField(max_length=255, db_index=True)
-    slug = models.SlugField(max_length=255, db_index=True)
-    image = models.ImageField(upload_to="products/%Y/%m/%d", blank=True)
-    description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    available = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    category: Category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
+    name: str = models.CharField(max_length=255, db_index=True)
+    slug: str = models.SlugField(max_length=255, db_index=True)
+    image: models.ImageField = models.ImageField(upload_to="products/%Y/%m/%d", blank=True)
+    description: str = models.TextField(blank=True)
+    price: models.DecimalField = models.DecimalField(max_digits=10, decimal_places=2)
+    available: bool = models.BooleanField(default=True)
+    created: models.DateTimeField = models.DateTimeField(auto_now_add=True)
+    updated: models.DateTimeField = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ("name",)
-        index_together = (("id", "slug"),)
+        ordering: tuple = ("name",)
+        index_together: tuple = (("id", "slug"),)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String representation of the product object.
         """
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         """
         Returns the URL to access a particular product instance.
         """
@@ -109,22 +109,22 @@ class Comment(models.Model):
             including the email of the user who wrote it.
     """
 
-    post = models.ForeignKey(
+    post: Product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
         related_name="comments",
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="user")
-    name = models.CharField(max_length=64)
-    email = models.EmailField()
-    body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
+    user: User = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="user")
+    name: str = models.CharField(max_length=64)
+    email: str = models.EmailField()
+    body: str = models.TextField()
+    created: models.DateTimeField = models.DateTimeField(auto_now_add=True)
+    active: bool = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ("created",)
+        ordering: tuple = ("created",)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String representation of the comment object.
         """

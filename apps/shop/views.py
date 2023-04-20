@@ -1,13 +1,12 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from apps.cart.forms import CartAddProductForm
-
-# Local
 from apps.shop.forms import CommentForm
 from apps.shop.models import Category, Product
 
 
-def product_list(request, category_slug=None):
+def product_list(request: HttpRequest, category_slug: str = None) -> HttpResponse:
     """
     View that displays the list of available products or products belonging to a specific category.
 
@@ -36,7 +35,7 @@ def product_list(request, category_slug=None):
     )
 
 
-def product_detail(request, id, slug):
+def product_detail(request: HttpRequest, id: int, slug: str) -> HttpResponse:
     """
     View that displays the details of a specific product, including its comments and allows
         authenticated users to add a comment.
@@ -81,7 +80,7 @@ def product_detail(request, id, slug):
     )
 
 
-def product_search(request):
+def product_search(request: HttpRequest) -> HttpResponse:
     """
     View that searches for products based on a query string and displays the results.
 

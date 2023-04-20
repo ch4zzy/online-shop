@@ -1,9 +1,8 @@
-# Local
 from django.urls import path
 
 from apps.shop import views
 
-app_name = "shop"
+app_name: str = "shop"
 
 
 urlpatterns = [

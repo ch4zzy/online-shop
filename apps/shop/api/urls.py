@@ -4,7 +4,7 @@ from rest_framework import routers
 
 from apps.shop.api import views
 
-app_name = "shop"
+app_name: str = "shop"
 
 
 router = routers.SimpleRouter()

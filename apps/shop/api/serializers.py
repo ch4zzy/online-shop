@@ -1,4 +1,3 @@
-# Local
 from rest_framework import serializers
 
 from apps.shop.models import Category, Comment, Product
@@ -19,8 +18,8 @@ class CategorySerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = Category
-        fields = "__all__"
+        model: type = Category
+        fields: list[str] = "__all__"
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -52,8 +51,8 @@ class ProductSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = Product
-        fields = "__all__"
+        model: type = Product
+        fields: list[str] = "__all__"
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -81,5 +80,5 @@ class CommentSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = Comment
-        fields = "__all__"
+        model: type = Comment
+        fields: list[str] = "__all__"

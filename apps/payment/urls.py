@@ -1,9 +1,8 @@
-# Local
 from django.urls import path
 
 from apps.payment import views
 
-app_name = "payment"
+app_name: str = "payment"
 
 urlpatterns = [
     path("process/", views.payment_process, name="process"),

@@ -4,14 +4,14 @@ import braintree
 import weasyprint
 from django.conf import settings
 from django.core.mail import EmailMessage
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 
-# Local
 from apps.orders.models import Order
 
 
-def payment_process(request):
+def payment_process(request: HttpRequest) -> HttpResponse:
     """
     Handle payment processing for orders.
 
@@ -71,7 +71,7 @@ def payment_process(request):
         )
 
 
-def payment_done(request):
+def payment_done(request: HttpRequest) -> HttpResponse:
     """
     Render the payment done page.
 
@@ -84,7 +84,7 @@ def payment_done(request):
     return render(request, "payment/done.html")
 
 
-def payment_canceled(request):
+def payment_canceled(request: HttpRequest) -> HttpResponse:
     """
     Render the payment canceled page.
 

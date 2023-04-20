@@ -2,20 +2,18 @@ import weasyprint
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 
 from apps.cart.cart import Cart
 from apps.orders.forms import OrderCreateForm
-
-# Local
 from apps.orders.models import Order, OrderItem
 from apps.orders.tasks import order_created
 
 
-def order_create(request):
+def order_create(request: HttpRequest) -> HttpResponse:
     """
     View function that handles the creation of orders.
 
@@ -74,7 +72,7 @@ def order_create(request):
 
 
 @login_required
-def user_order_detail(request, order_id):
+def user_order_detail(request: HttpRequest, order_id: int) -> HttpResponse:
     """
     View function that displays the details of a user's order.
 
@@ -96,7 +94,7 @@ def user_order_detail(request, order_id):
 
 
 @staff_member_required
-def admin_order_detail(request, order_id):
+def admin_order_detail(request: HttpRequest, order_id: int) -> HttpResponse:
     """
     View function that displays the details of an order for an admin user.
 
@@ -118,7 +116,7 @@ def admin_order_detail(request, order_id):
 
 
 @staff_member_required
-def admin_order_pdf(request, order_id):
+def admin_order_pdf(request: HttpRequest, order_id: int) -> HttpResponse:
     """
     Generate a PDF version of an order for staff members.
 

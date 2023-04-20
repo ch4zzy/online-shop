@@ -1,9 +1,8 @@
-# Local
 from django.urls import path
 
 from apps.orders import views
 
-app_name = "orders"
+app_name: str = "orders"
 
 urlpatterns = [
     path("create/", views.order_create, name="order_create"),

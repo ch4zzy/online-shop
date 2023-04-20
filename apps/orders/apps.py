@@ -8,4 +8,4 @@ class OrdersConfig(AppConfig):
     This class defines the name of the app as 'orders'.
     """
 
-    name = "apps.orders"
+    name: str = "apps.orders"

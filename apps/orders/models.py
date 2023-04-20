@@ -5,8 +5,6 @@ from django.db import models
 from django.urls import reverse
 
 from apps.coupons.models import Coupon
-
-# Local
 from apps.shop.models import Product
 
 
@@ -34,32 +32,32 @@ class Order(models.Model):
         get_total_cost(): The total cost of the Order model.
     """
 
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField()
-    address = models.CharField(max_length=250)
-    postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    paid = models.BooleanField(default=False)
-    braintree_id = models.CharField(max_length=150, blank=True)
-    coupon = models.ForeignKey(
+    first_name: str = models.CharField(max_length=50)
+    last_name: str = models.CharField(max_length=50)
+    email: str = models.EmailField()
+    address: str = models.CharField(max_length=250)
+    postal_code: str = models.CharField(max_length=20)
+    city: str = models.CharField(max_length=100)
+    created: models.DateTimeField = models.DateTimeField(auto_now_add=True)
+    updated: models.DateTimeField = models.DateTimeField(auto_now=True)
+    paid: bool = models.BooleanField(default=False)
+    braintree_id: str = models.CharField(max_length=150, blank=True)
+    coupon: models.ForeignKey = models.ForeignKey(
         Coupon,
         related_name="orders",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
     )
-    discount = models.IntegerField(
+    discount: int = models.IntegerField(
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(100)],
     )
 
     class Meta:
-        ordering = ("-created",)
+        ordering: tuple = ("-created",)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Returns the string representation of the Order model.
 
@@ -68,7 +66,7 @@ class Order(models.Model):
         """
         return f"Order {self.id}"
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         """
         Returns the URL for the Order model.
 
@@ -77,14 +75,14 @@ class Order(models.Model):
         """
         return reverse("orders:user_order_detail", args=[self.id])
 
-    def get_total_cost(self):
+    def get_total_cost(self) -> Decimal:
         """
         Returns the total cost of the Order model.
 
         Returns:
             decimal.Decimal: The total cost of the Order model.
         """
-        total_cost = sum(item.get_cost() for item in self.items.all())
+        total_cost: Decimal = sum(item.get_cost() for item in self.items.all())
         return total_cost - total_cost * (self.discount / Decimal("100"))
 
 
@@ -103,22 +101,24 @@ class OrderItem(models.Model):
         get_cost(): Returns the total cost of the item.
     """
 
-    order = models.ForeignKey(
+    order: models.ForeignKey = models.ForeignKey(
         Order,
         related_name="items",
         on_delete=models.CASCADE,
     )
-    product = models.ForeignKey(Product, related_name="order_items", on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    quantity = models.PositiveIntegerField(default=1)
+    product: models.ForeignKey = models.ForeignKey(
+        Product, related_name="order_items", on_delete=models.CASCADE
+    )
+    price: Decimal = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity: int = models.PositiveIntegerField(default=1)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Returns a string representation of the item, consisting of its ID.
         """
         return str(self.id)
 
-    def get_cost(self):
+    def get_cost(self) -> Decimal:
         """
         Returns the total cost of the item, calculated as the price multiplied by the quantity.
         """

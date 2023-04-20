@@ -2,7 +2,7 @@ import csv
 import datetime
 
 from django.contrib import admin
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
@@ -19,7 +19,7 @@ class OrderItemInline(admin.TabularInline):
     raw_id_fields = ["product"]
 
 
-def export_to_csv(modeladmin, request, queryset):
+def export_to_csv(modeladmin: admin.ModelAdmin, request: HttpRequest, queryset: list[Order]) -> HttpResponse:
     """
     Action that exports selected Orders to a CSV file.
 
@@ -52,7 +52,7 @@ def export_to_csv(modeladmin, request, queryset):
 export_to_csv.short_description = "Export to CSV"
 
 
-def order_detail(obj):
+def order_detail(obj: Order) -> str:
     """
     Returns a link to the detail page for an Order.
 
@@ -66,7 +66,7 @@ def order_detail(obj):
     return mark_safe(f"<a href='{url}'>View</a>")
 
 
-def order_pdf(obj):
+def order_pdf(obj: Order) -> str:
     """
     Returns a link to generate a PDF for an Order.
 

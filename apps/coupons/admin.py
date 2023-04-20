@@ -1,4 +1,3 @@
-# Local
 from django.contrib import admin
 
 from apps.coupons.models import Coupon
@@ -18,9 +17,9 @@ class CouponAdmin(admin.ModelAdmin):
 
     """
 
-    list_display = ["code", "valid_from", "valid_to", "discount", "active"]
-    list_filter = ["active", "valid_from", "valid_to"]
-    search_fields = ["code"]
+    list_display: list[str] = ["code", "valid_from", "valid_to", "discount", "active"]
+    list_filter: list[str] = ["active", "valid_from", "valid_to"]
+    search_fields: list[str] = ["code"]
 
 
 admin.site.register(Coupon, CouponAdmin)

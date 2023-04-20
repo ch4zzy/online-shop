@@ -1,9 +1,8 @@
-# Local
 from django.urls import path
 
 from apps.coupons import views
 
-app_name = "coupons"
+app_name: str = "coupons"
 
 
 urlpatterns = [

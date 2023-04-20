@@ -1,15 +1,14 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 from apps.coupons.forms import CouponApplyForm
-
-# Local
 from apps.coupons.models import Coupon
 
 
 @require_POST
-def coupon_apply(request):
+def coupon_apply(request: HttpRequest) -> HttpResponse:
     """
     Apply a coupon to the current cart session if it is valid and active.
 

@@ -1,10 +1,10 @@
 from decimal import Decimal
+from typing import Union
 
 from django.conf import settings
+from django.http import HttpRequest
 
 from apps.coupons.models import Coupon
-
-# Local
 from apps.shop.models import Product
 
 
@@ -32,7 +32,7 @@ class Cart:
         after applying the coupon discount
     """
 
-    def __init__(self, request):
+    def __init__(self, request: HttpRequest) -> None:
         """
         Constructor that initializes the cart object.
 
@@ -46,7 +46,7 @@ class Cart:
         self.cart = cart
         self.coupon_id = self.session.get("coupon_id")
 
-    def __iter__(self):
+    def __iter__(self) -> dict[str, Union[Product, Decimal, int]]:
         """
         Allows the cart object to be iterated over.
         """
@@ -61,13 +61,13 @@ class Cart:
             item["total_price"] = item["price"] * item["quantity"]
             yield item
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Returns the total number of items in the cart.
         """
         return sum(item["quantity"] for item in self.cart.values())
 
-    def add(self, product, quantity=1, override_quantity=False):
+    def add(self, product: Product, quantity: int = 1, override_quantity: bool = False) -> None:
         """
         Adds a product to the cart.
 
@@ -86,13 +86,13 @@ class Cart:
             self.cart[product_id]["quantity"] += quantity
         self.save()
 
-    def save(self):
+    def save(self) -> None:
         """
         Saves the cart to the session.
         """
         self.session.modified = True
 
-    def remove(self, product):
+    def remove(self, product: Product) -> None:
         """
         Removes a product from the cart.
 
@@ -104,14 +104,14 @@ class Cart:
             del self.cart[product_id]
             self.save()
 
-    def clear(self):
+    def clear(self) -> None:
         """
         Remove all items from the cart session.
         """
         del self.session[settings.CART_SESSION_ID]
         self.save()
 
-    def get_total_price(self):
+    def get_total_price(self) -> Decimal:
         """
         Calculate the total price of all items in the cart.
 
@@ -121,7 +121,7 @@ class Cart:
         return sum(Decimal(item["price"]) * item["quantity"] for item in self.cart.values())
 
     @property
-    def coupon(self):
+    def coupon(self) -> Union[Coupon, None]:
         """
         Get the coupon object associated with the cart.
 
@@ -132,7 +132,7 @@ class Cart:
             return Coupon.objects.get(id=self.coupon_id)
         return None
 
-    def get_discount(self):
+    def get_discount(self) -> Decimal:
         """
         Calculate the discount amount based on the coupon associated with the cart.
 
@@ -143,7 +143,7 @@ class Cart:
             return self.coupon.discount / Decimal("100") * self.get_total_price()
         return Decimal("0")
 
-    def get_total_price_after_discount(self):
+    def get_total_price_after_discount(self) -> Decimal:
         """
         Calculate the total price after applying the coupon discount.
 

@@ -1,4 +1,3 @@
-# Local
 from django.urls import include, path
 
 from apps.account import views

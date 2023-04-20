@@ -12,4 +12,4 @@ class AccountConfig(AppConfig):
         name (str): The name of the app ('apps.account')
     """
 
-    name = "apps.account"
+    name: str = "apps.account"

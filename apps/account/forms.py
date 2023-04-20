@@ -1,4 +1,3 @@
-# Local
 from django import forms
 from django.contrib.auth.models import User
 
@@ -17,8 +16,8 @@ class LoginForm(forms.Form):
         password (CharField): The user's password.
     """
 
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username: forms.CharField = forms.CharField()
+    password: forms.CharField = forms.CharField(widget=forms.PasswordInput)
 
 
 class UserRegistration(forms.ModelForm):
@@ -34,14 +33,14 @@ class UserRegistration(forms.ModelForm):
         password2 (CharField): A confirmation field for the user's password.
     """
 
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Repeat password", widget=forms.PasswordInput)
+    password: forms.CharField = forms.CharField(label="Password", widget=forms.PasswordInput)
+    password2: forms.CharField = forms.CharField(label="Repeat password", widget=forms.PasswordInput)
 
     class Meta:
-        model = User
-        fields = ("username", "first_name", "email")
+        model: type = User
+        fields: tuple[str, ...] = ("username", "first_name", "email")
 
-    def clean_password2(self):
+    def clean_password2(self) -> str:
         """
         Validates the user's password.
 
@@ -73,8 +72,8 @@ class UserEditForm(forms.ModelForm):
     """
 
     class Meta:
-        model = User
-        fields = ("first_name", "last_name", "email")
+        model: type = User
+        fields: tuple[str, ...] = ("first_name", "last_name", "email")
 
 
 class ProfileEditForm(forms.ModelForm):
@@ -90,5 +89,5 @@ class ProfileEditForm(forms.ModelForm):
     """
 
     class Meta:
-        model = Profile
-        fields = ("date_of_birth", "photo")
+        model: type = Profile
+        fields: tuple[str, ...] = ("date_of_birth", "photo")

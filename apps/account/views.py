@@ -1,8 +1,7 @@
-# Local
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
 from apps.account.forms import (
@@ -15,7 +14,7 @@ from apps.account.models import Profile
 from apps.orders.models import Order
 
 
-def user_login(request):
+def user_login(request: HttpRequest) -> HttpResponse:
     """
     Authenticates a user for login using their username and password.
 
@@ -54,7 +53,7 @@ def user_login(request):
 
 
 @login_required
-def dashboard(request):
+def dashboard(request: HttpRequest) -> HttpResponse:
     """
     Displays the dashboard page for a logged-in user, showing their orders.
 
@@ -82,7 +81,7 @@ def dashboard(request):
         )
 
 
-def register(request):
+def register(request: HttpRequest) -> HttpResponse:
     """
     Handles registration of a new user.
 
@@ -120,7 +119,7 @@ def register(request):
 
 
 @login_required
-def edit(request):
+def edit(request: HttpRequest) -> HttpResponse:
     """
     Handles editing of a user's profile.
 

@@ -1,9 +1,8 @@
+from django.db.models.query import QuerySet
 from rest_framework import viewsets
 
 from apps.orders.api.permissions import IsAdminOrReadOnly
 from apps.orders.api.serializers import OrderSerializer
-
-# Local
 from apps.orders.models import Order
 
 
@@ -27,6 +26,6 @@ class OrderViewSet(viewsets.ModelViewSet):
     - Other users can only retrieve orders (read-only).
     """
 
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+    queryset: "QuerySet[Order]" = Order.objects.all()
+    serializer_class: "OrderSerializer" = OrderSerializer
+    permission_classes: "tuple[type[IsAdminOrReadOnly]]" = (IsAdminOrReadOnly,)

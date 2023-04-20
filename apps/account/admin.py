@@ -13,7 +13,6 @@ Classes:
 
 from django.contrib import admin
 
-# Local
 from apps.account.models import Profile
 
 

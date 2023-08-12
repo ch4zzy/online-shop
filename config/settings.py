@@ -37,9 +37,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     "rest_framework",
-    "rest_framework.authtoken",
     "drf_yasg",
-    "djoser",
     # Local
     "apps.account",
     "apps.shop",
@@ -154,8 +152,6 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "apps.account.authentication.EmailAuthBackend",
-    "social_core.backends.facebook.FacebookOAuth2",
-    "social_core.backends.twitter.TwitterOAuth",
     "social_core.backends.google.GoogleOAuth2",
 ]
 # Auth backends end
@@ -219,3 +215,11 @@ REST_FRAMEWORK = {
 # rest config end
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+
+# celery config
+
+# Celery config
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")

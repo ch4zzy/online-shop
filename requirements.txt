@@ -3,6 +3,7 @@ django-environ==0.10.0
 Pillow==9.5.0
 social-auth-app-django==5.2.0
 celery==5.3.1
+redis==4.5.5
 flower==2.0.0
 braintree==4.21.0
 weasyprint==59.0

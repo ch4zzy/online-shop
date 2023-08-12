@@ -8,8 +8,24 @@ services:
       context: .
     ports:
       - "8000:8000"
+    environment:
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
     depends_on:
       - db
+      - redis
+
+  celery:
+    build: .
+    command: celery -A config worker -l INFO
+    volumes:
+      - .:/code
+    environment:
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - django
+      - redis
 
   nginx:
     build: ./nginx
@@ -20,10 +36,8 @@ services:
     depends_on:
       - django
 
-  rabbitmq:
-    image: rabbitmq:3.10.7-management
-    ports:
-      - 5672:5672
+  redis:
+    image: "redis:alpine"
 
   db:
     image: postgres:14.7
@@ -31,17 +45,6 @@ services:
       - config/.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-
-  celery:
-    restart: always
-    build: .
-    command: celery -A config worker -l info
-    volumes:
-      - .:/code
-    container_name: celery
-    depends_on:
-      - rabbitmq
-      - django
 
 volumes:
   postgres_data:

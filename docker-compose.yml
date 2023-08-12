@@ -6,6 +6,7 @@ services:
       - static:/static
     build:
       context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     environment:
@@ -16,7 +17,10 @@ services:
       - redis
 
   celery:
-    build: .
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.celery
     command: celery -A config worker -l INFO
     volumes:
       - .:/code

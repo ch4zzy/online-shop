@@ -63,6 +63,7 @@ def product_detail(request: HttpRequest, id: int, slug: str) -> HttpResponse:
                 new_comment.post = post
                 new_comment.user_id = request.user.id
                 new_comment.save()
+                return redirect("shop:product_detail", id=id, slug=slug)
         else:
             comment_form = CommentForm()
     else:

@@ -34,8 +34,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Social auth
     "social_django",
-    "crispy_forms",
-    "crispy_bootstrap4",
     "rest_framework",
     "drf_yasg",
     # Local
@@ -45,11 +43,16 @@ INSTALLED_APPS = [
     "apps.orders",
     "apps.payment",
     "apps.coupons",
+    # Tailwind
+    "tailwind",
+    "theme",
+    "django_browser_reload",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -87,7 +90,8 @@ DATABASES = {
         "NAME": env("POSTGRES_DB"),
         "USER": env("POSTGRES_USER"),
         "PASSWORD": env("POSTGRES_PASSWORD"),
-        "HOST": env("DB_HOST"),
+        # "HOST": env("DB_HOST"),
+        "HOST": "localhost",
         "PORT": env.int("DB_PORT"),
     }
 }
@@ -194,12 +198,6 @@ EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 # SMRP end
 
 
-# crispy
-CRISPY_TEMPLATE_PACK = "bootstrap4"
-
-# crispy end
-
-
 # rest config
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
@@ -217,9 +215,19 @@ REST_FRAMEWORK = {
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 
-# celery config
-
 # Celery config
 
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+
+# Celery config end
+
+
+# Tailwind config
+
+TAILWIND_APP_NAME = "theme"
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+# Tailwind config end

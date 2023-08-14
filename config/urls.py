@@ -12,6 +12,7 @@ urlpatterns = [
     path("coupons/", include("apps.coupons.urls", namespace="coupons")),
     path("", include("apps.shop.urls", namespace="shop")),
     path("social-auth/", include("social_django.urls", namespace="social")),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 if settings.DEBUG:

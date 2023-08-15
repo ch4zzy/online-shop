@@ -1,62 +1,72 @@
 {% extends "shop/base.html" %}
 
 {% block title %}
-    Checkout
+Checkout
 {% endblock %}
 
 {% block content %}
 <div class="flex justify-center items-center h-screen">
     <form class="w-full max-w-sm bg-white p-6 rounded-lg shadow-md" action="." method="post">
-      {% csrf_token %}
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-first-name">
-          First Name
-        </label>
-        <input name="first_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
-        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
-      </div>
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-          Last Name
-        </label>
-        <input name="last_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe">
-      </div>
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-email">
-          Email
-        </label>
-        <input name="email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-email" type="email" placeholder="Email">
-      </div>
-      
-      <div class="mb-6">
-        <label  class="block text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-          Address
-        </label>
-        <input name="address" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="">
-      </div>
-      
-      
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-          City
-        </label>
-        <input name="city" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="">
-      </div>
+        {% csrf_token %}
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-first-name">
+                First Name
+            </label>
+            <input name="first_name"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                id="grid-first-name" type="text" placeholder="Jane">
+            <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
+                Last Name
+            </label>
+            <input name="last_name"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-last-name" type="text" placeholder="Doe">
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-email">
+                Email
+            </label>
+            <input name="email"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-email" type="email" placeholder="Email">
+        </div>
 
-      
-      
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
-          Postal code
-        </label>
-        <input name="postal_code" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="">
-      </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
+                Address
+            </label>
+            <input name="address"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-last-name" type="text" placeholder="">
+        </div>
 
-      <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
-        
-    </input>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
+                City
+            </label>
+            <input name="city"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-last-name" type="text" placeholder="">
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-last-name">
+                Postal code
+            </label>
+            <input name="postal_code"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-last-name" type="text" placeholder="">
+        </div>
+
+        <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+
+        </input>
 
     </form>
-  </div>
-  
+</div>
+
 {% endblock %}

@@ -1,18 +1,17 @@
 {% load static %}
-{% load static tailwind_tags %}
 
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    {% tailwind_css %}
     <meta charset="utf-8" />
     <title>
         {% block title %}
         Shop
         {% endblock %}
     </title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>

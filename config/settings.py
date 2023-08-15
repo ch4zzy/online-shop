@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     # Social auth
     "social_django",
     "rest_framework",
-    "drf_yasg",
     # Local
     "apps.account",
     "apps.shop",
@@ -46,13 +45,13 @@ INSTALLED_APPS = [
     # Tailwind
     "tailwind",
     "theme",
-    "django_browser_reload",
+    # "django_browser_reload",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
+    # "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -90,8 +89,8 @@ DATABASES = {
         "NAME": env("POSTGRES_DB"),
         "USER": env("POSTGRES_USER"),
         "PASSWORD": env("POSTGRES_PASSWORD"),
-        # "HOST": env("DB_HOST"),
-        "HOST": "localhost",
+        "HOST": env("DB_HOST"),
+        # "HOST": "localhost",
         "PORT": env.int("DB_PORT"),
     }
 }
@@ -132,7 +131,9 @@ USE_L10N = True
 
 # STATIC config
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = "/static/"
+
+# STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_PDF = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"

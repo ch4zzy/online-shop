@@ -10,7 +10,7 @@ staticfiles
 media/
 img/
 config/static
-static
+theme/static
 
 # Celery
 celerybeat*

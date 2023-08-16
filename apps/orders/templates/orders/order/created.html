@@ -1,13 +1,15 @@
-{% extends "shop/base.html" %}
+{% extends 'shop/base.html' %}
 
 {% block title %}
     Thank you
 {% endblock %}
 
 {% block content %}
-    <h1>Thank you for the order</h1>
-    <p>
+<div class="py-10">
+    <h1 class="text-3xl font-bold mb-4">Thank you for the order</h1>
+    <p class="text-lg">
         Your order has been successfully completed.
         Your order number is <strong>{{ order.id }}</strong>.
     </p>
-{% endblock %}
+</div>
+{% endblock content %}

@@ -57,11 +57,11 @@ def cart_detail(request: HttpRequest) -> HttpResponse:
         HttpResponse: The HTTP response object.
     """
     cart = Cart(request)
+    coupon_apply_form = CouponApplyForm()
     for item in cart:
         item["update_quantity_form"] = CartAddProductForm(
             initial={"quantity": item["quantity"], "update": True}
         )
-        coupon_apply_form = CouponApplyForm()
     return render(
         request,
         "cart/detail.html",

@@ -1,75 +1,72 @@
 {% extends "shop/base.html" %}
-{% load crispy_forms_tags %}
 {% load static %}
 
 {% block title %}
-    {{ product.name }}
+{{ product.name }}
 {% endblock %}
 
 {% block content %}
-    <div class="product-detail">
-        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/img.png" %}{% endif %} ">
-        <h1>{{ product.name }}</h1>
-    <h2>
-        <a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a>
-    </h2>
-    <p class="price">${{ product.price }}</p>
-        <form action="{% url "cart:cart_add" product.id %}" method="post">
-            {{ cart_product_form }}
-            {% csrf_token %}
-            <input type="submit" value="Add to cart">
-        </form>
-    {{ product.description|linebreaks }}
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 card mb-4  mt-3 left  top">
-                <div class="card-body">
-                    
-                    <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
-                    <p class="card-text ">{{ post.content | safe }}</p>
-                </div>
+
+<body class="bg-gray-100">
+    <div class="max-w-4xl mx-auto bg-white p-8 mt-8 rounded-md shadow-md">
+        <div class="grid grid-cols-2 gap-8">
+            <div class="flex items-center justify-center">
+                <img src="{% if product.image %}{{ product.image.url }}{% else %} https://png.pngtree.com/png-clipart/20191120/original/pngtree-not-found-outline-icon-vectors-png-image_5053765.jpg {% endif %}"
+                    alt="Товар" class="w- h-auto">
             </div>
-
-            <div class="col-md-8 card mb-4  mt-3 ">
-                <div class="card-body">
-                    
-                    {% with comments.count as total_comments %}
-                        <h2>{{ total_comments }} comments</h2>
-
-                        <p>
-                    {% endwith %} {% for comment in comments %}
-                        </p>
-
-                        <div class="comments" style="padding: 10px;">
-                            <p class="font-weight-bold" style="background-color: #ADD8E6">
-                                {{ comment.name }}
-                                <span class=" text-muted font-weight-normal">
-                                    {{ comment.created }}
-                                </span>
-                            </p>
-                            {{ comment.body | linebreaks }}
-                        </div>
-
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="col-md-8 card mb-4  mt-3 ">
-                <div class="card-body">
-                    {% if new_comment %}
-                        <div class="alert alert-success" role="alert">
-                            Your comment is awaiting moderation
-                        </div>
-                    {% else %}
-                        <h3>Leave a comment</h3>
-                        <form method="post" style="margin-top: 1.3em;">
-                            {{ comment_form | crispy }}
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                        </form>
-                    {% endif %}
-                </div>
+            <div>
+                <h1 class="text-2xl font-semibold mb-4">{{ product.name }}</h1>
+                <p class="text-gray-600 mb-4">Price: ${{ product.price }}</p>
+                <p class="text-gray-800 mb-4">Description: {{ product.description|linebreaks }}</p>
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                        value="Add to cart">Add to cart</button>
+                </form>
             </div>
         </div>
     </div>
+    <div class="max-w-4xl mx-auto bg-white p-8 mt-8 rounded-md shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Leave a comment!</h2>
+        <form method="post" style="margin-top: 1.3em;">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2" for="name">Your name</label>
+                <input type="text" id="name" name="name"
+                    class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2" for="name">Your email</label>
+                <input type="email" id="email" name="email"
+                    class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2" for="comment">Your comment
+                </label>
+                <textarea id="comment" name="body" rows="4"
+                    class="w-full border rounded-lg py-2 px-3 focus:outline-none focus:ring focus:border-blue-500"></textarea>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Send</button>
+        </form>
+    </div>
+    <div class="max-w-4xl mx-auto bg-white p-8 mt-8 rounded-md shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Comments</h2>
+
+        {% with comments.count as total_comments %}
+        <h2 class="text-xl font-semibold mb-4">Total: {{ total_comments }}</h2>
+        {% endwith %}
+
+        {% for comment in comments %}
+        <ul class="space-y-4">
+            <li class="border p-4">
+                <p class="text-gray-600 mb-2">{{ comment.name }}</p>
+                <p class="text-gray-800">{{ comment.body }}</p>
+                <p class="text-gray-600">{{ comment.created }}</p>
+            </li>
+        </ul>
+        {% endfor %}
+
+    </div>
+</body>
 {% endblock %}

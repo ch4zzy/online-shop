@@ -43,3 +43,51 @@ Admin panel to manage products and orders:
 Automatic order confirmation emails:
 
 - **Instant Notifications:** Customers receive emails with order details after purchase.
+
+## Setup
+
+### Environment
+
+All this environment need to be set up.
+
+path: `config/.env`
+
+```
+# Django 
+
+SECRET_KEY=
+DEBUG=
+
+# Database
+
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+DB_HOST=
+DB_PORT=
+
+# Email
+
+EMAIL_HOST=
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+EMAIL_PORT=
+EMAIL_USE_TLS=
+
+# OAuth
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=
+
+# Braintree
+
+BRAINTREE_MERCHANT_ID=
+BRAINTREE_PUBLIC_KEY=
+BRAINTREE_PRIVATE_KEY=
+```
+
+### Docker
+
+clone repo: `git clone https://github.com/ch4zzy/online-shop.git`
+build docker: `docker build .`
+run docker: `docker-compose up -d`

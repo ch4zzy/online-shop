@@ -89,5 +89,7 @@ BRAINTREE_PRIVATE_KEY=
 ### Docker
 
 clone repo: `git clone https://github.com/ch4zzy/online-shop.git`
+
 build docker: `docker build .`
+
 run docker: `docker-compose up -d`

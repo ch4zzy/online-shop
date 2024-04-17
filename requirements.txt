@@ -9,7 +9,7 @@ braintree==4.21.0
 weasyprint==59.0
 psycopg==3.1.10
 python-jose==3.3.0
-gunicorn==21.2.0
+gunicorn==22.0.0
 djangorestframework==3.14.0
 djoser==2.2.0
 black==23.3.0

@@ -12,7 +12,7 @@ python-jose==3.3.0
 gunicorn==22.0.0
 djangorestframework==3.14.0
 djoser==2.2.0
-black==23.3.0
+black==24.3.0
 flake8==6.0.0
 pre-commit==3.2.2
 isort==5.12.0
